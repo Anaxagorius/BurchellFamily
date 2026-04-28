@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Family Tree | The Burchell Family of Glace Bay</title>
+  <meta name="description" content="Complete Burchell family tree from Pierre Boutilier in 1720 France to Bernard Thomas — nine generations of Nova Scotia history." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── Extra tree styles ── */
+    .tree-section {
+      padding: 4rem 0;
+      background: var(--smoke);
+    }
+    .tree-section.alt { background: var(--parchment); }
+
+    .gen-block {
+      margin-bottom: 1.5rem;
+    }
+
+    .gen-header {
+      background: var(--ns-navy);
+      color: var(--ns-gold);
+      text-align: center;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      margin-bottom: 0.75rem;
+      font-weight: bold;
+    }
+
+    .person-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .couple-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
+    }
+
+    .wedding-ring {
+      font-size: 1.4rem;
+      color: var(--ns-gold);
+    }
+
+    .connector-down {
+      text-align: center;
+      font-size: 1.4rem;
+      color: var(--ns-gold);
+      line-height: 1;
+      margin: 0.2rem 0;
+    }
+
+    .person-card {
+      min-width: 160px;
+      max-width: 210px;
+    }
+
+    .person-card.highlight {
+      border-color: var(--can-red);
+    }
+    .person-card.highlight .name { color: var(--can-red); }
+
+    .branch-note {
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--mid-grey);
+      font-style: italic;
+      margin: 0.3rem 0 0.75rem;
+    }
+
+    .siblings-note {
+      text-align: center;
+      background: var(--parchment);
+      border: 1px dashed var(--parchment-dk);
+      border-radius: 4px;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      color: #556;
+      max-width: 700px;
+      margin: 0.5rem auto;
+    }
+
+    .mystery-card {
+      background: #fff8e1;
+      border: 2px dashed var(--ns-gold);
+      border-radius: 4px;
+      padding: 0.75rem 1.1rem;
+      text-align: center;
+      min-width: 160px;
+      max-width: 200px;
+    }
+    .mystery-card .name { font-size: 0.9rem; color: #795; font-style: italic; }
+    .mystery-card .years { font-size: 0.75rem; color: var(--mid-grey); }
+
+    .line-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+    }
+    .legend-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-french { background: var(--acadian-bl); }
+    .dot-irish { background: var(--celtic-grn); }
+    .dot-mixed { background: var(--ns-gold); }
+    .dot-direct { background: var(--can-red); }
+
+    .side-note {
+      max-width: 680px;
+      margin: 1.5rem auto;
+      background: #fff;
+      border-left: 4px solid var(--ns-gold);
+      padding: 1rem 1.5rem;
+      border-radius: 0 4px 4px 0;
+      font-size: 0.9rem;
+      color: #444;
+      box-shadow: 0 1px 6px var(--shadow);
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">⚜ <span>Burchell</span> Family</a>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="stories.html">Our Stories</a></li>
+      <li><a href="family-tree.html" class="active">Family Tree</a></li>
+      <li><a href="timeline.html">Timeline</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="sources.html">Research &amp; Sources</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-banner">
+  <div class="container">
+    <h1>Family Tree</h1>
+    <p class="tagline">Nine generations — France 1720 to Cape Breton today</p>
+  </div>
+</header>
+
+<div class="heritage-stripe" aria-hidden="true"></div>
+
+<!-- ── Legend ──────────────────────────────────────────────── -->
+<section class="section" style="padding: 2.5rem 0;">
+  <div class="container">
+    <div class="line-legend">
+      <div class="legend-item"><div class="legend-dot dot-french"></div> French Huguenot line</div>
+      <div class="legend-item"><div class="legend-dot dot-irish"></div> Irish line</div>
+      <div class="legend-item"><div class="legend-dot dot-mixed"></div> Mixed/Nova Scotian</div>
+      <div class="legend-item"><div class="legend-dot dot-direct"></div> Your direct ancestors</div>
+    </div>
+
+    <div class="side-note reveal">
+      📌 <strong>How to read this tree:</strong> This tree follows the direct ancestral line to Bernard Thomas (bottom), with key collateral relatives noted. Dashed borders indicate people whose identities are still under research. Use the <a href="stories.html">Stories</a> page for narratives, and <a href="sources.html">Sources</a> for documentary evidence.
+    </div>
+  </div>
+</section>
+
+<!-- ── The Tree ─────────────────────────────────────────────── -->
+<section class="section alt tree-section">
+  <div class="container">
+    <div class="tree-wrapper">
+      <div class="tree">
+
+        <!-- GENERATION 1 -->
+        <div class="gen-block reveal">
+          <div class="gen-header">Generation 1 — The Founders, 1752 (Your 6× Great-Grandparents)</div>
+          <div class="couple-row">
+            <div class="person-card highlight">
+              <span class="flag-badge">🇫🇷</span>
+              <span class="name">Pierre Boutilier</span>
+              <span class="years">1720–1796</span>
+              <span class="detail">Montbéliard, France · Huguenot<br>Arrived NS on <em>Speedwell</em> 1752<br>Settled Boutilier's Point</span>
+            </div>
+            <span class="wedding-ring">💍</span>
+            <div class="person-card">
+              <span class="name">Marguerite Tanner</span>
+              <span class="years">~1720–?</span>
+              <span class="detail">Wife of Pierre<br>Arrived NS 1752</span>
+            </div>
+            <div style="width: 60px; text-align:center; color: var(--mid-grey); font-size: 0.8rem; align-self: center;">&amp; also on<br>Speedwell:</div>
+            <div class="person-card highlight">
+              <span class="flag-badge">🇫🇷</span>
+              <span class="name">Jean Dauphinee</span>
+              <span class="years">1722–1798</span>
+              <span class="detail">Montbéliard, France · Huguenot<br>Arrived NS 1752<br>Settled Hacketts Cove</span>
+            </div>
+            <span class="wedding-ring">💍</span>
+            <div class="person-card">
+              <span class="name">Marie Madeleine Mourand</span>
+              <span class="years">~1722–?</span>
+              <span class="detail">Wife of Jean Dauphinee</span>
+            </div>
+          </div>
+          <div class="connector-down">↓</div>
+          <div class="branch-note">Both families buried at St. Paul's Anglican Cemetery, French Village</div>
+        </div>
+
+        <hr class="gen-divider" />
+
+        <!-- GENERATION 2 -->
+        <div class="gen-block reveal">
+          <div class="gen-header">Generation 2 — First Nova Scotia-Born (Your 5× Great-Grandparents)</div>
+          <div class="couple-row">
+            <div class="person-card highlight">
+              <span class="flag-badge">🇨🇦</span>
+              <span class="name">Jean George Boutilier</span>
+              <span class="years">1764–1845</span>
+              <span class="detail">Born NS · Son of Pierre<br>St. Margaret's Bay</span>
+            </div>
+            <span class="wedding-ring">💍 ~1785</span>
+            <div class="person-card highlight">
+              <span class="name">Catherine Dauphinee</span>
+              <span class="years">~1765–?</span>
+              <span class="detail">Daughter of Jean Dauphinee<br>The two founding families unite</span>
+            </div>
+          </div>
+          <div class="connector-down">↓</div>
+          <div class="branch-note">Registered at St. Paul's Anglican Parish Register</div>
+        </div>
+
+        <hr class="gen-divider" />
+
+        <!-- GENERATION 3 -->
+        <div class="gen-block reveal">
+          <div class="gen-header">Generation 3 — The 1810 Marriage Bond (Your 4× Great-Grandparents)</div>
+          <div class="couple-row">
+            <div class="person-card highlight">
+              <span class="flag-badge">🇨🇦</span>
+              <span class="name">Francis Boutilier</span>
+              <span class="years">~1788 – after 1851</span>
+              <span class="detail">Born St. Margaret's Bay<br>Son of Jean George + Catherine</span>
+            </div>
+            <span class="wedding-ring">💍 4 June 1810</span>
+            <div class="person-card highlight">
+              <span class="name">Susannah Butler</span>
+              <span class="years">~1790–~1822</span>
+              <span class="detail">Spinster · Church of England<br>Halifax County</span>
+            </div>
+          </div>
+          <div class="connector-down">↓</div>
+          <div class="siblings-note">
+            Children: John (~1812), James (~1815), <strong>Susan (~1819)</strong>, Elizabeth (~1821), + at least 6 more with Elizabeth Kiddy (2nd wife ~1822)
+          </div>
+        </div>
+
+        <hr class="gen-divider" />
+
+        <!-- GENERATION 4 (two marriages) -->
+        <div class="gen-block reveal">
+          <div class="gen-header">Generation 4 — The Widow of French Village (Your 3× Great-Grandparents)</div>
+          <div class="couple-row">
+            <div class="person-card highlight">
+              <span class="flag-badge">🇨🇦</span>
+              <span class="name">Susan Boutilier</span>
+              <span class="years">~1819 – after 1881</span>
+              <span class="detail">Born French Village<br>Origin: "French" (census 1871)</span>
+            </div>
+
+            <div style="display:flex; flex-direction: column; align-items: center; gap: 0.3rem;">
+              <div style="display:flex; align-items: center; gap: 0.5rem;">
+                <span class="wedding-ring">💍 m1. ~1840</span>
+                <div class="mystery-card">
+                  <span class="name">Unknown Husband</span>
+                  <span class="years">Died ~1848–1851</span>
+                  <span class="detail" style="font-size:0.75rem;">Still under research</span>
+                </div>
+              </div>
+              <div style="font-size: 0.8rem; color: var(--mid-grey);">Widowed by 1851 · 3 sons under 10</div>
+              <div style="display:flex; align-items: center; gap: 0.5rem;">
+                <span class="wedding-ring">💍 m2. ~1855</span>
+                <div class="person-card highlight">
+                  <span class="flag-badge">🇮🇪</span>
+                  <span class="name">John Burchell</span>
+                  <span class="years">~1831–1894</span>
+                  <span class="detail">Born Ireland · Irish Protestant<br>Famine immigrant · Fisherman/Farmer</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="connector-down">↓</div>
+          <div class="siblings-note">
+            Children with John Burchell: <strong>John Jr. (1857)</strong>, Benjamin (~1860), William (~1862), James (~1864), George (~1866), Henry (~1870), Eliza (~1873)
+          </div>
+        </div>
+
+        <hr class="gen-divider" />
+
+        <!-- GENERATION 5 -->
+        <div class="gen-block reveal">
+          <div class="gen-header">Generation 5 — The Fisherman (Your 2× Great-Grandparents)</div>
+          <div class="couple-row">
+            <div class="person-card highlight">
+              <span class="flag-badge">🇨🇦</span>
+              <span class="name">John Burchell Jr.</span>
+              <span class="years">1857–1930</span>
+              <span class="detail">Born French Village<br>Fisherman · St. Margaret's Bay</span>
+            </div>
+            <span class="wedding-ring">💍 1 Jan 1881</span>
+            <div class="person-card highlight">
+              <span class="name">Eliza Jane Connolly</span>
+              <span class="years">~1860–?</span>
+              <span class="detail">French Village<br>Father: John Connolly, Coaster</span>
+            </div>
+          </div>
+          <div class="connector-down">↓</div>
+          <div class="siblings-note">
+            Children: <strong>Ernest (~1881)</strong>, William (~1883), + others<br>
+            Also: Benjamin Burchell's daughter Beatrice married John DesRoches (1907)
+          </div>
+        </div>
+
+        <hr class="gen-divider" />
+
+        <!-- GENERATION 6 -->
+        <div class="gen-block reveal">
+          <div class="gen-header">Generation 6 — The Coal Miner (Your Great-Great-Grandparents)</div>
+          <div class="couple-row">
+            <div class="person-card highlight">
+              <span class="flag-badge">⛏️</span>
+              <span class="name">Ernest William Burchell</span>
+              <span class="years">12 Nov 1881 – 8 Dec 1945</span>
+              <span class="detail">Born St. Margaret's Bay<br>Fireman · Dominion Coal Co.<br>35 years · Glace Bay</span>
+            </div>
+            <span class="wedding-ring">💍 12 Nov 1907</span>
+            <div class="person-card highlight">
+              <span class="name">Annie McDonald</span>
+              <span class="years">~1887–?</span>
+              <span class="detail">Born Louisbourg, CB<br>Father: Alex McDonald,<br>Coal Trimmer</span>
+            </div>
+          </div>
+          <div class="connector-down">↓</div>
+          <div class="siblings-note">677 Arthur St., Glace Bay · Children: <strong>Howard Frederick</strong>, Daniel Burchell</div>
+        </div>
+
+        <hr class="gen-divider" />
+
+        <!-- GENERATION 7 -->
+        <div class="gen-block reveal">
+          <div class="gen-header">Generation 7 — The Glace Bay Generation (Your Great-Grandparents)</div>
+          <div class="couple-row">
+            <div class="person-card highlight">
+              <span class="flag-badge">🏠</span>
+              <span class="name">Howard Frederick Burchell</span>
+              <span class="years">~1922–?</span>
+              <span class="detail">Born Glace Bay<br>677 Arthur St.</span>
+            </div>
+            <span class="wedding-ring">💍 9 May 1949</span>
+            <div class="person-card highlight">
+              <span class="name">Rita Artis Allison</span>
+              <span class="years">~1929–?</span>
+              <span class="detail">"Da Nanny"<br>Married in Glace Bay</span>
+            </div>
+          </div>
+          <div class="connector-down">↓</div>
+        </div>
+
+        <hr class="gen-divider" />
+
+        <!-- GENERATION 8 -->
+        <div class="gen-block reveal">
+          <div class="gen-header">Generation 8 — (Your Grandparents)</div>
+          <div class="couple-row">
+            <div class="person-card highlight">
+              <span class="name">Marie Elaine Burchell</span>
+              <span class="years">b. ~1950s</span>
+              <span class="detail">Daughter of Howard &amp; Rita</span>
+            </div>
+            <span class="wedding-ring">💍</span>
+            <div class="person-card">
+              <span class="name">Roy Appleton</span>
+              <span class="detail">Partner/Husband</span>
+            </div>
+          </div>
+          <div class="connector-down">↓</div>
+        </div>
+
+        <hr class="gen-divider" />
+
+        <!-- GENERATION 9 -->
+        <div class="gen-block reveal">
+          <div class="gen-header">Generation 9 — The Family Historian</div>
+          <div class="person-row">
+            <div class="person-card highlight" style="border-color: var(--can-red); border-width: 3px; max-width: 260px;">
+              <span class="flag-badge">🍁</span>
+              <span class="name" style="font-size: 1.1rem; color: var(--can-red);">Bernard Thomas</span>
+              <span class="detail">Glace Bay, Nova Scotia<br>9th generation from Pierre Boutilier 1720<br>Keeper of this family's story</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /.tree -->
+    </div><!-- /.tree-wrapper -->
+  </div>
+</section>
+
+<!-- ── Connolly / McDonald Side Lines ─────────────────────── -->
+<section class="section parchment-section">
+  <div class="container">
+    <h2 class="section-title reveal">Allied Family Lines</h2>
+    <p class="section-subtitle">The families who married into the Burchell tree</p>
+
+    <div class="card-grid">
+      <div class="card reveal">
+        <div class="card-icon" style="background: var(--celtic-grn);">☘️</div>
+        <div class="card-body">
+          <h3>Connolly Line</h3>
+          <p><strong>John Connolly</strong> (~1831, French Village) — Coaster (ran coastal trading ships). Married Leah ___. Their daughter <strong>Eliza Jane Connolly</strong> (~1860) married John Burchell Jr. on 1 January 1881. Witness at that wedding: Lucy Connolly, likely Eliza's sister. The Connolly and Burchell families were neighbours in French Village.</p>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-icon" style="background: var(--acadian-bl);">⛏️</div>
+        <div class="card-body">
+          <h3>McDonald Line</h3>
+          <p><strong>Alex McDonald</strong> (Coal Trimmer, Louisbourg) married Sarah ___. Their daughter <strong>Annie McDonald</strong> (~1887, Louisbourg) married Ernest Burchell on 12 November 1907 in Sydney. The McDonalds were already embedded in Cape Breton's coal economy before the Burchells arrived — likely part of what drew Ernest to Glace Bay.</p>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-icon" style="background: var(--can-red);">🌊</div>
+        <div class="card-body">
+          <h3>Dauphinee Line</h3>
+          <p><strong>Jean Dauphinee</strong> (1722, Montbéliard, France) arrived on the <em>Speedwell</em> in 1752 alongside Pierre Boutilier. His daughter Catherine Dauphinee married Jean George Boutilier ~1785, uniting the two founding families just one generation after their arrival. The Dauphinee name is still found around St. Margaret's Bay today.</p>
+        </div>
+      </div>
+
+      <div class="card reveal">
+        <div class="card-icon">❓</div>
+        <div class="card-body">
+          <h3>Unknown — Husband #1</h3>
+          <p>Susan Boutilier's first husband (~1840–1851) remains unidentified. He fathered three sons who all appear in the 1851 Census as boys under age 10. His surname — carried by those three boys — represents another whole branch of the family tree, still waiting to be discovered in the NS Archives.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-crest" aria-hidden="true">⚜</div>
+  <p class="footer-title">The Burchell Family of Glace Bay</p>
+  <p class="footer-tagline">Nova Scotia · Ireland · France · 1720 – Present</p>
+  <ul class="footer-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="stories.html">Our Stories</a></li>
+    <li><a href="family-tree.html">Family Tree</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="sources.html">Research &amp; Sources</a></li>
+  </ul>
+  <hr class="footer-divider" />
+  <p class="footer-copy">🍁 Glace Bay, Cape Breton, Nova Scotia, Canada &nbsp;|&nbsp; Research by Bernard Thomas</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

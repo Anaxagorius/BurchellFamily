@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery | The Burchell Family of Glace Bay</title>
+  <meta name="description" content="Historical documents, marriage certificates, and records of the Burchell family of Glace Bay, Nova Scotia." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    .doc-feature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-bottom: 4rem;
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 3px 16px var(--shadow);
+    }
+
+    .doc-feature.reverse { }
+    .doc-feature.reverse .doc-feature-img { order: 2; }
+    .doc-feature.reverse .doc-feature-text { order: 1; }
+
+    .doc-feature-img {
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .doc-feature-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s;
+    }
+
+    .doc-feature-img:hover img { transform: scale(1.03); }
+
+    .doc-feature-img .zoom-hint {
+      position: absolute;
+      bottom: 0.75rem;
+      right: 0.75rem;
+      background: rgba(0,0,0,0.65);
+      color: var(--ns-gold-lt);
+      font-size: 0.78rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 3px;
+    }
+
+    .doc-feature-text {
+      padding: 2.5rem 2rem 2.5rem 2.5rem;
+    }
+
+    .doc-feature-text .doc-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--can-red);
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .doc-feature-text h3 { color: var(--ns-navy); margin-bottom: 0.75rem; }
+
+    .doc-detail-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 1rem 0;
+    }
+    .doc-detail-table th {
+      text-align: left;
+      padding: 0.4rem 0.75rem;
+      background: var(--parchment);
+      color: var(--ns-navy);
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    .doc-detail-table td {
+      padding: 0.4rem 0.75rem;
+      border-bottom: 1px solid var(--parchment-dk);
+      color: #444;
+    }
+    .doc-detail-table tr:last-child td { border-bottom: none; }
+
+    @media (max-width: 768px) {
+      .doc-feature { grid-template-columns: 1fr; }
+      .doc-feature.reverse .doc-feature-img,
+      .doc-feature.reverse .doc-feature-text { order: unset; }
+      .doc-feature-text { padding: 1.5rem; }
+      .doc-feature-img { min-height: 280px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">⚜ <span>Burchell</span> Family</a>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="stories.html">Our Stories</a></li>
+      <li><a href="family-tree.html">Family Tree</a></li>
+      <li><a href="timeline.html">Timeline</a></li>
+      <li><a href="gallery.html" class="active">Gallery</a></li>
+      <li><a href="sources.html">Research &amp; Sources</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-banner">
+  <div class="container">
+    <h1>Gallery</h1>
+    <p class="tagline">Primary documents — the paper trail of a family's history</p>
+  </div>
+</header>
+
+<div class="heritage-stripe" aria-hidden="true"></div>
+
+<!-- ── Intro ───────────────────────────────────────────────── -->
+<section class="section" style="padding: 2.5rem 0 1rem;">
+  <div class="container">
+    <div class="quote-block reveal">
+      <blockquote>"These aren't just old papers. They're proof that our ancestors existed, loved, worked, and mattered."</blockquote>
+      <cite>— On the importance of primary source documents in family history</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ── Featured Document 1: Marriage Certificate ─────────────── -->
+<section class="section section-alt" id="da-nanny">
+  <div class="container">
+    <h2 class="section-title reveal">Featured Documents</h2>
+
+    <div class="doc-feature reveal">
+      <div class="doc-feature-img" data-gallery-img="images/DaNannyMarriageCert.jpg" data-gallery-cap="Marriage Certificate of Howard Frederick Burchell & Rita Artis Allison — 9 May 1949, Glace Bay, Nova Scotia">
+        <img src="images/DaNannyMarriageCert.jpg" alt="Marriage certificate of Howard Frederick Burchell and Rita Artis Allison, Glace Bay 1949" loading="lazy" />
+        <span class="zoom-hint">🔍 Click to enlarge</span>
+      </div>
+      <div class="doc-feature-text">
+        <p class="doc-label">📄 Marriage Certificate · 1949</p>
+        <h3>"Da Nanny's Marriage Cert"</h3>
+        <p>This is the marriage certificate of <strong>Howard Frederick Burchell</strong> and <strong>Rita Artis Allison</strong>, married on the <strong>9th of May, 1949</strong> in Glace Bay, Cape Breton, Nova Scotia. Lovingly called "Da Nanny's Marriage Cert" in the family, this document connects the older generations to the living ones.</p>
+        <p>Howard was the son of Ernest William Burchell — the coal miner who worked 35 years for the Dominion Coal Company — and Annie McDonald. His father had died just four years earlier in 1945. Howard gave 677 Arthur Street, Glace Bay, as his address — the same home his father had lived in for decades.</p>
+        <table class="doc-detail-table">
+          <tr><th>Groom</th><td>Howard Frederick Burchell</td></tr>
+          <tr><th>Bride</th><td>Rita Artis Allison</td></tr>
+          <tr><th>Date</th><td>9 May 1949</td></tr>
+          <tr><th>Place</th><td>Glace Bay, Cape Breton, Nova Scotia</td></tr>
+          <tr><th>Groom's parents</th><td>Ernest &amp; Annie (McDonald) Burchell</td></tr>
+          <tr><th>Family address</th><td>677 Arthur St., Glace Bay</td></tr>
+        </table>
+        <p>From this marriage came Marie Elaine Burchell, and her son Bernard Thomas — the keeper of this family's story.</p>
+      </div>
+    </div>
+
+    <!-- Featured Document 2: Death Certificate -->
+    <div class="doc-feature reverse reveal">
+      <div class="doc-feature-text">
+        <p class="doc-label">📄 Death Certificate · 1945</p>
+        <h3>Ernest William Burchell — Death Record</h3>
+        <p>The death certificate of <strong>Ernest William Burchell</strong>, who died on <strong>December 8, 1945</strong> at Glace Bay General Hospital. This document was a landmark discovery in the family research — it confirmed Ernest's full name, birth date, parents, occupation, and cause of death in one primary source.</p>
+        <p>Ernest's son <strong>Daniel Burchell</strong> was the informant, which introduced a previously unknown family member — Howard's brother — into the tree. The certificate listed Ernest's parents only as "Burchell" (father) and "Unknown" (mother), a common limitation when the informant didn't know the details. His marriage record later filled that gap.</p>
+        <table class="doc-detail-table">
+          <tr><th>Name</th><td>Ernest William Burchell</td></tr>
+          <tr><th>Death</th><td>8 December 1945, Glace Bay General Hospital</td></tr>
+          <tr><th>Born</th><td>12 November 1881, Halifax, NS (age 64 yrs 29 days)</td></tr>
+          <tr><th>Residence</th><td>677 Arthur St., Glace Bay</td></tr>
+          <tr><th>Occupation</th><td>Fireman, Dominion Coal Co., 35 years</td></tr>
+          <tr><th>Cause of death</th><td>Pulmonary Tuberculosis</td></tr>
+          <tr><th>Wife</th><td>Annie Burchell</td></tr>
+          <tr><th>Informant</th><td>Daniel Burchell (son)</td></tr>
+          <tr><th>Buried</th><td>Greenwood Cemetery, Dec. 11, 1945</td></tr>
+        </table>
+      </div>
+      <div class="doc-feature-img" data-gallery-img="images/ErnestBurchellDC.jpg" data-gallery-cap="Death Certificate of Ernest William Burchell — December 8, 1945, Glace Bay General Hospital">
+        <img src="images/ErnestBurchellDC.jpg" alt="Death certificate of Ernest William Burchell, 1945, Glace Bay" loading="lazy" />
+        <span class="zoom-hint">🔍 Click to enlarge</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Gallery Grid: Ancestor Portraits / Context ─────────────── -->
+<section class="section" id="context">
+  <div class="container">
+    <h2 class="section-title reveal">Historical Context &amp; Heritage</h2>
+    <p class="section-subtitle">Images and context that bring the family's world to life</p>
+
+    <div class="gallery-grid">
+
+      <div class="gallery-item reveal">
+        <div style="background: var(--ns-navy); height: 220px; display:flex; align-items:center; justify-content:center; flex-direction: column; color: var(--ns-gold); font-size: 3.5rem;">
+          ⛵
+          <span style="font-size: 0.85rem; color: #9ab; margin-top: 0.5rem; font-style: italic;">The Speedwell, 1752</span>
+        </div>
+        <div class="gallery-caption">The ship <em>Speedwell</em> carried your ancestors to Halifax on 4 July 1752 — Pierre Boutilier and Jean Dauphinee among the passengers.</div>
+      </div>
+
+      <div class="gallery-item reveal">
+        <div style="background: #1a2a1a; height: 220px; display:flex; align-items:center; justify-content:center; flex-direction: column; color: #6ab56a; font-size: 3.5rem;">
+          🇫🇷
+          <span style="font-size: 0.85rem; color: #9ba; margin-top: 0.5rem; font-style: italic;">Montbéliard, France</span>
+        </div>
+        <div class="gallery-caption">Montbéliard, eastern France — birthplace of Pierre Boutilier (1720) and Jean Dauphinee (1722). A Protestant island in a Catholic sea.</div>
+      </div>
+
+      <div class="gallery-item reveal">
+        <div style="background: #1a1a2a; height: 220px; display:flex; align-items:center; justify-content:center; flex-direction: column; color: #a0b8d0; font-size: 3.5rem;">
+          ⚓
+          <span style="font-size: 0.85rem; color: #89a; margin-top: 0.5rem; font-style: italic;">St. Margaret's Bay</span>
+        </div>
+        <div class="gallery-caption">St. Margaret's Bay, Nova Scotia — home to five generations of Boutiliers and Burchells. Boutilier's Point still bears the family name.</div>
+      </div>
+
+      <div class="gallery-item reveal">
+        <div style="background: #2a1a0a; height: 220px; display:flex; align-items:center; justify-content:center; flex-direction: column; color: #c89050; font-size: 3.5rem;">
+          ⛏️
+          <span style="font-size: 0.85rem; color: #a87; margin-top: 0.5rem; font-style: italic;">Glace Bay Collieries</span>
+        </div>
+        <div class="gallery-caption">Glace Bay's Dominion Coal Company collieries — where Ernest Burchell worked for 35 years. The coal mines defined a generation of Cape Breton families.</div>
+      </div>
+
+      <div class="gallery-item reveal">
+        <div style="background: #1a0a0a; height: 220px; display:flex; align-items:center; justify-content:center; flex-direction: column; color: #c86060; font-size: 3.5rem;">
+          ☘️
+          <span style="font-size: 0.85rem; color: #a88; margin-top: 0.5rem; font-style: italic;">Ireland — The Famine Years</span>
+        </div>
+        <div class="gallery-caption">Ireland 1845–1852 — the Great Famine drove John Burchell from his homeland to the fishing villages of Nova Scotia, where he would marry Susan Boutilier.</div>
+      </div>
+
+      <div class="gallery-item reveal">
+        <div style="background: #0a1a0a; height: 220px; display:flex; align-items:center; justify-content:center; flex-direction: column; color: #80c880; font-size: 3.5rem;">
+          📜
+          <span style="font-size: 0.85rem; color: #8a9; margin-top: 0.5rem; font-style: italic;">Marriage Bond 1810</span>
+        </div>
+        <div class="gallery-caption">The 1810 Marriage Bond of Francis Boutilier and Susannah Butler — NS Archives RG 1 v.170 p.78 — one of the oldest documentary traces of the family.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── Upcoming / Add Your Photos ─────────────────────────────── -->
+<section class="section section-alt">
+  <div class="container">
+    <div style="max-width: 680px; margin: 0 auto; text-align: center;" class="reveal">
+      <div style="font-size: 3rem; margin-bottom: 1rem;">📸</div>
+      <h2 style="color: var(--ns-navy); margin-bottom: 0.75rem;">Add Your Family Photos</h2>
+      <p>Do you have photographs of family members, homes, or places connected to the Burchell family of Glace Bay? This gallery is a living tribute — add your images to help build a richer picture of our shared heritage.</p>
+      <p style="color: var(--mid-grey); font-size: 0.9rem; font-style: italic;">Photographs of Ernest, Howard, Rita, Daniel, Marie, or any Burchell/McDonald/Connolly family members would be especially treasured. Historical photographs of Glace Bay's coal industry, 677 Arthur Street, or St. Margaret's Bay are also welcome.</p>
+      <div class="heritage-badges" style="justify-content: center;">
+        <span class="badge badge-ns">⚓ French Village</span>
+        <span class="badge badge-canada">⛏️ Glace Bay</span>
+        <span class="badge badge-irish">☘️ Irish Heritage</span>
+        <span class="badge badge-french">⚜ Huguenot Roots</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Lightbox ─────────────────────────────────────────────── -->
+<div class="modal-overlay" role="dialog" aria-label="Image viewer">
+  <div class="modal-img-wrap">
+    <button class="modal-close" aria-label="Close image viewer">✕</button>
+    <img src="" alt="Enlarged document" />
+    <p class="modal-caption"></p>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-crest" aria-hidden="true">⚜</div>
+  <p class="footer-title">The Burchell Family of Glace Bay</p>
+  <p class="footer-tagline">Nova Scotia · Ireland · France · 1720 – Present</p>
+  <ul class="footer-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="stories.html">Our Stories</a></li>
+    <li><a href="family-tree.html">Family Tree</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="sources.html">Research &amp; Sources</a></li>
+  </ul>
+  <hr class="footer-divider" />
+  <p class="footer-copy">🍁 Glace Bay, Cape Breton, Nova Scotia, Canada &nbsp;|&nbsp; Research by Bernard Thomas</p>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  // Feature doc click-to-enlarge
+  document.querySelectorAll('[data-gallery-img]').forEach(el => {
+    el.addEventListener('click', () => {
+      const overlay = document.querySelector('.modal-overlay');
+      const img = overlay.querySelector('img');
+      const cap = overlay.querySelector('.modal-caption');
+      img.src = el.dataset.galleryImg;
+      cap.textContent = el.dataset.galleryCap || '';
+      overlay.classList.add('open');
+    });
+    el.style.cursor = 'pointer';
+  });
+</script>
+</body>
+</html>
