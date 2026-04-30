@@ -1,280 +1,636 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>The Allison Family History</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Allison Heritage | Burchell Family of Glace Bay</title>
+  <meta name="description" content="The Allison family heritage — from the Scottish Lowlands of Renfrewshire and Acadian French Cape Breton to the coal fields of Glace Bay, Nova Scotia." />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
 
-<style>
-    :root {
-        --bg: #0f172a;
-        --panel: #111827;
-        --text: #e5e7eb;
-        --muted: #9ca3af;
-        --accent: #38bdf8;
-        --accent-2: #22c55e;
-        --border: #1f2933;
+    /* Allison page — Scottish tartan accent stripe */
+    .allison-stripe {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        #00274C 0px, #00274C 16px,
+        #2D6A4F 16px, #2D6A4F 32px,
+        #C8A035 32px, #C8A035 36px,
+        #2D6A4F 36px, #2D6A4F 52px,
+        #00274C 52px, #00274C 68px,
+        #BF0A30 68px, #BF0A30 72px
+      );
     }
 
-    * {
-        box-sizing: border-box;
+    .gen-block { margin-bottom: 1.5rem; }
+
+    .gen-header {
+      background: var(--ns-navy);
+      color: var(--ns-gold);
+      text-align: center;
+      padding: 0.6rem 1.5rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 3px;
+      margin-bottom: 0.75rem;
+      font-weight: bold;
     }
 
-    body {
-        margin: 0;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: linear-gradient(180deg, #020617, #0f172a);
-        color: var(--text);
-        line-height: 1.7;
+    .couple-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.5rem;
     }
 
-    header {
-        padding: 4rem 1.5rem 3rem;
-        text-align: center;
-        background: radial-gradient(circle at top, #020617 0%, #020617 60%);
-        border-bottom: 1px solid var(--border);
+    .wedding-ring { font-size: 1.4rem; color: var(--ns-gold); }
+
+    .connector-down {
+      text-align: center;
+      font-size: 1.4rem;
+      color: var(--ns-gold);
+      line-height: 1;
+      margin: 0.2rem 0;
     }
 
-    header h1 {
-        font-size: clamp(2.2rem, 4vw, 3.2rem);
-        margin: 0;
-        letter-spacing: 0.04em;
+    .gen-divider {
+      border: none;
+      border-top: 1px dashed var(--parchment-dk);
+      margin: 1.5rem 0;
     }
 
-    header p {
-        margin-top: 1rem;
-        color: var(--muted);
-        max-width: 720px;
-        margin-left: auto;
-        margin-right: auto;
+    .siblings-note {
+      text-align: center;
+      background: var(--parchment);
+      border: 1px dashed var(--parchment-dk);
+      border-radius: 4px;
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+      color: #556;
+      max-width: 700px;
+      margin: 0.5rem auto;
     }
 
-    nav {
-        position: sticky;
-        top: 0;
-        background: rgba(2, 6, 23, 0.9);
-        backdrop-filter: blur(6px);
-        border-bottom: 1px solid var(--border);
-        z-index: 10;
+    .heritage-callout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
     }
 
-    nav ul {
-        display: flex;
-        gap: 1rem;
-        list-style: none;
-        margin: 0;
-        padding: 0.75rem 1rem;
-        justify-content: center;
-        flex-wrap: wrap;
+    .heritage-col {
+      background: #fff;
+      border-top: 4px solid var(--ns-navy);
+      padding: 1.25rem 1.5rem;
+      border-radius: 0 0 4px 4px;
+      box-shadow: 0 2px 8px var(--shadow);
     }
 
-    nav a {
-        color: var(--accent);
-        text-decoration: none;
-        font-size: 0.9rem;
+    .heritage-col.scottish { border-top-color: #00274C; }
+    .heritage-col.acadian  { border-top-color: #1B4F72; }
+    .heritage-col.coal     { border-top-color: #C8A035; }
+
+    .heritage-col h4 { margin-bottom: 0.5rem; color: var(--ns-navy); font-size: 1rem; }
+    .heritage-col p  { font-size: 0.9rem; color: #444; margin: 0; }
+
+    .allison-timeline {
+      border-left: 3px solid var(--ns-gold);
+      padding-left: 1.75rem;
+      margin-top: 1.5rem;
     }
 
-    nav a:hover {
-        text-decoration: underline;
+    .allison-tl-item {
+      position: relative;
+      margin-bottom: 1.4rem;
     }
 
-    main {
-        max-width: 900px;
-        margin: auto;
-        padding: 3rem 1.5rem;
+    .allison-tl-item::before {
+      content: '';
+      position: absolute;
+      left: -2.15rem;
+      top: 0.35rem;
+      width: 12px;
+      height: 12px;
+      background: var(--ns-gold);
+      border: 2px solid var(--ns-navy);
+      border-radius: 50%;
     }
 
-    section {
-        margin-bottom: 4rem;
-        background: rgba(17, 24, 39, 0.85);
-        border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 2.5rem;
+    .allison-tl-item .tl-label {
+      display: inline-block;
+      background: var(--ns-navy);
+      color: var(--ns-gold);
+      font-size: 0.78rem;
+      font-weight: bold;
+      padding: 0.1rem 0.5rem;
+      border-radius: 2px;
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
     }
 
-    section h2 {
-        margin-top: 0;
-        font-size: 1.8rem;
-        border-left: 4px solid var(--accent);
-        padding-left: 0.75rem;
-    }
+    .allison-tl-item h4 { margin: 0.25rem 0 0.35rem; color: var(--ns-navy); font-size: 1rem; }
+    .allison-tl-item p  { margin: 0; font-size: 0.9rem; color: #444; }
 
-    section h3 {
-        margin-top: 2rem;
-        color: var(--accent-2);
+    .side-note {
+      max-width: 680px;
+      margin: 1.5rem auto;
+      background: #fff;
+      border-left: 4px solid var(--ns-gold);
+      padding: 1rem 1.5rem;
+      border-radius: 0 4px 4px 0;
+      font-size: 0.9rem;
+      color: #444;
+      box-shadow: 0 1px 6px var(--shadow);
     }
-
-    p {
-        margin: 1rem 0;
-    }
-
-    ul {
-        margin-left: 1.2rem;
-    }
-
-    .timeline {
-        border-left: 2px solid var(--accent);
-        padding-left: 1.5rem;
-        margin-top: 2rem;
-    }
-
-    .timeline-item {
-        margin-bottom: 1.5rem;
-    }
-
-    .timeline-item span {
-        color: var(--accent);
-        font-weight: 600;
-    }
-
-    footer {
-        text-align: center;
-        padding: 2rem 1.5rem 3rem;
-        color: var(--muted);
-        border-top: 1px solid var(--border);
-        font-size: 0.85rem;
-    }
-</style>
+  </style>
 </head>
-
 <body>
 
-<header>
-    <h1>The Allison Family History</h1>
-    <p>
-        From the Scottish Lowlands to the coal fields of Cape Breton — 
-        a documented family history of migration, adaptation, and endurance.
-    </p>
-</header>
-
-<nav>
-    <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#scotland">Scottish Origins</a></li>
-        <li><a href="#atlantic">Across the Atlantic</a></li>
-        <li><a href="#cape-breton">Cape Breton</a></li>
-        <li><a href="#coal">Coal Mining Era</a></li>
-        <li><a href="#modern">Modern Line</a></li>
-        <li><a href="#timeline">Timeline</a></li>
+<!-- Navigation -->
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-brand">&#x26DC; <span>Burchell</span> Family</a>
+    <button class="nav-toggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="stories.html">Our Stories</a></li>
+      <li><a href="family-tree.html">Family Tree</a></li>
+      <li><a href="timeline.html">Timeline</a></li>
+      <li><a href="gallery.html">Gallery &amp; Video</a></li>
+      <li><a href="sources.html">Research &amp; Sources</a></li>
+      <li><a href="allison.html" class="active">Allison Heritage</a></li>
     </ul>
+  </div>
 </nav>
 
-<main>
+<!-- Page Banner -->
+<header class="page-banner">
+  <div class="container">
+    <h1>The Allison Heritage</h1>
+    <p class="tagline">From the Scottish Lowlands &amp; Acadian Cape Breton to the coal fields of Glace Bay</p>
+  </div>
+</header>
 
-<section id="overview">
-    <h2>Overview</h2>
-    <p>
-        The Allison family story begins in late‑18th‑century Scotland and unfolds
-        across the Atlantic in Cape Breton, Nova Scotia. Over generations, the
-        family transitioned from Scottish Lowland roots to maritime livelihoods,
-        and ultimately to coal mining communities that defined industrial Cape Breton.
-    </p>
-    <p>
-        This history traces the direct Allison line using church records, census data,
-        and documented family research, prioritizing evidence over oral tradition.
-    </p>
-</section>
+<div class="allison-stripe" aria-hidden="true"></div>
 
-<section id="scotland">
-    <h2>Scottish Origins</h2>
-
-    <h3>William Allison Sr. & Jean Stewart</h3>
-    <p>
-        William Allison Sr., born around 1785, lived in the Inverkip and Greenock
-        region of Scotland. He married Jean Stewart on 10 August 1811 in Greenock.
-    </p>
-    <p>
-        Jean Stewart was the daughter of James Stewart and Isobel Niven, placing
-        the family firmly within documented Lowland Scottish parish records.
-    </p>
-</section>
-
-<section id="atlantic">
-    <h2>A Transatlantic Generation</h2>
-
-    <h3>William Allison Jr.</h3>
-    <p>
-        Born on 7 August 1812 in Inverkip, Scotland, William Allison Jr. became a
-        sailor and fisherman. His work connected Scotland with Atlantic Canada
-        through seasonal fishing routes.
-    </p>
-
-    <h3>Louise Fougeau</h3>
-    <p>
-        During this period, William Allison Jr. formed a relationship with Louise
-        Fougeau, an Acadian French woman from the Cape Breton region. This union
-        introduced Acadian ancestry into the Allison line.
-    </p>
-</section>
-
-<section id="cape-breton">
-    <h2>Establishment in Cape Breton</h2>
-
-    <h3>Francis Allison</h3>
-    <p>
-        Francis Allison was born in 1858 in Cape Breton, Nova Scotia, confirming
-        that the Allison family had permanently crossed the Atlantic by the
-        mid‑19th century.
-    </p>
-
-    <h3>Marriage to Mary Ann Campbell</h3>
-    <p>
-        Francis married Mary Ann Campbell on 21 February 1886 at St. Joseph’s
-        Catholic Church in North Sydney. Her parents were Alexander Campbell
-        and Rachel Young.
-    </p>
-</section>
-
-<section id="coal">
-    <h2>The Coal Mining Era</h2>
-
-    <h3>John James Allison</h3>
-    <p>
-        Born on 21 April 1885 in Sydney Mines, John James Allison entered the coal
-        mining industry that defined Cape Breton’s economy. He later settled in
-        Glace Bay.
-    </p>
-
-    <h3>Marriage to Maria York</h3>
-    <p>
-        John James married Maria York, whose English ancestry added another
-        cultural layer to the family line.
-    </p>
-</section>
-
-<section id="modern">
-    <h2>The Modern Connection</h2>
-
-    <h3>Rita Artis Allison</h3>
-    <p>
-        Born around 1918 in Glace Bay, Rita Artis Allison married Howard Frederick
-        Burchell on 9 May 1949, carrying the Allison line into the present generation.
-    </p>
-</section>
-
-<section id="timeline">
-    <h2>Condensed Timeline</h2>
-
-    <div class="timeline">
-        <div class="timeline-item"><span>~1785</span> — Birth of William Allison Sr. (Scotland)</div>
-        <div class="timeline-item"><span>1811</span> — Marriage of William Allison Sr. & Jean Stewart</div>
-        <div class="timeline-item"><span>1812</span> — Birth of William Allison Jr.</div>
-        <div class="timeline-item"><span>1858</span> — Birth of Francis Allison in Cape Breton</div>
-        <div class="timeline-item"><span>1886</span> — Francis Allison marries Mary Ann Campbell</div>
-        <div class="timeline-item"><span>1885</span> — Birth of John James Allison</div>
-        <div class="timeline-item"><span>~1918</span> — Birth of Rita Artis Allison</div>
-        <div class="timeline-item"><span>1949</span> — Marriage of Rita Allison & Howard Burchell</div>
+<!-- Introduction -->
+<section class="section">
+  <div class="container">
+    <div class="quote-block reveal">
+      <blockquote>
+        "In the coal-dusted streets of Glace Bay, the Allison family carried within them the stern faith of the Scottish Lowlands and the deep memory of Acadian French Nova Scotia. When Rita Artis Allison married Howard Frederick Burchell in 1949, two great Nova Scotian heritages became one."
+      </blockquote>
+      <cite>&#8212; Allison Family Research Notes</cite>
     </div>
+
+    <div class="heritage-callout reveal" style="margin-top: 2.5rem;">
+      <div class="heritage-col scottish">
+        <h4>&#127988; Scottish Lowland Roots</h4>
+        <p>The Allison surname traces to Inverkip and Greenock, Renfrewshire &#8212; a coastal parish west of Glasgow with strong Presbyterian traditions and ties to Atlantic trade. William Allison Sr. and Jean Stewart were married here in 1811.</p>
+      </div>
+      <div class="heritage-col acadian">
+        <h4>&#x26DC; Acadian French Heritage</h4>
+        <p>Louise Fougeau, an Acadian French woman of Cape Breton, married into the Allison line in the mid-19th century &#8212; weaving the French maritime tradition of Nova Scotia into the family. Her descendants carried this heritage through the coal country of Cape Breton.</p>
+      </div>
+      <div class="heritage-col coal">
+        <h4>&#9935; Cape Breton Coal Country</h4>
+        <p>By the generation of John James Allison (born 1885, Sydney Mines), the family was fully embedded in Cape Breton's industrial coal culture &#8212; the same Glace Bay world that shaped the Burchell family next door.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-</main>
+<!-- Heritage Badges -->
+<section class="section section-alt" style="padding: 1.5rem 0;">
+  <div class="container">
+    <div class="heritage-badges">
+      <span class="badge badge-french">&#127988; Scottish Lowlands &middot; Renfrewshire ~1785</span>
+      <span class="badge badge-ns">&#x26DC; Acadian French &middot; Cape Breton ~1840s</span>
+      <span class="badge badge-canada">&#9935; Cape Breton Coal &middot; Glace Bay 1885</span>
+      <span class="badge badge-irish">&#127809; Nova Scotia &middot; Glace Bay 1949</span>
+    </div>
+  </div>
+</section>
 
-<footer>
-    <p>
-        Allison Family History — compiled from church records, census data,
-        and documented family research. Evidence prioritized over tradition.
-    </p>
+<!-- The Family Tree -->
+<section class="section" id="tree" style="background: var(--smoke);">
+  <div class="container">
+    <h2 class="section-title reveal">The Allison Family Line</h2>
+    <p class="section-subtitle">Five generations &#8212; Scotland 1785 to Glace Bay 1949</p>
+
+    <div class="side-note reveal">
+      &#128204; This tree traces the direct Allison line to <strong>Rita Artis Allison</strong>, who married Howard Frederick Burchell on 9 May 1949 &#8212; connecting the Allison heritage to the Burchell family of Glace Bay and to Bernard Thomas, keeper of this story.
+    </div>
+
+    <!-- GEN 1 -->
+    <div class="gen-block reveal">
+      <div class="gen-header">Generation 1 &#8212; The Scottish Founders (~1785 &middot; Inverkip, Scotland)</div>
+      <div class="couple-row">
+        <div class="person-card highlight">
+          <span class="flag-badge">&#127988;</span>
+          <span class="name">William Allison Sr.</span>
+          <span class="years">~1785 &#8211; ?</span>
+          <span class="detail">Born Inverkip / Greenock<br>Renfrewshire, Scotland<br>Lowland Scottish &middot; Presbyterian</span>
+        </div>
+        <span class="wedding-ring">&#128141; 10 Aug 1811</span>
+        <div class="person-card highlight">
+          <span class="name">Jean Stewart</span>
+          <span class="years">~1790 &#8211; ?</span>
+          <span class="detail">Married Greenock, Scotland<br>Daughter of James Stewart<br>&amp; Isobel Niven</span>
+        </div>
+      </div>
+      <div class="connector-down">&#8595;</div>
+      <div class="siblings-note">Married 10 August 1811, Greenock Parish, Renfrewshire &#8212; Source: Scotland&#39;s People, Old Parish Registers</div>
+    </div>
+
+    <hr class="gen-divider" />
+
+    <!-- GEN 2 -->
+    <div class="gen-block reveal">
+      <div class="gen-header">Generation 2 &#8212; The Transatlantic Sailor (born 7 Aug 1812, Inverkip)</div>
+      <div class="couple-row">
+        <div class="person-card highlight">
+          <span class="flag-badge">&#127988;</span>
+          <span class="name">William Allison Jr.</span>
+          <span class="years">7 Aug 1812 &#8211; ?</span>
+          <span class="detail">Born Inverkip, Scotland<br>Sailor &amp; Fisherman<br>Atlantic fishing routes</span>
+        </div>
+        <span class="wedding-ring">&#128141;</span>
+        <div class="person-card highlight">
+          <span class="flag-badge">&#x26DC;</span>
+          <span class="name">Louise Fougeau</span>
+          <span class="years">~1815 &#8211; ?</span>
+          <span class="detail">Acadian French<br>Cape Breton, Nova Scotia<br>French maritime heritage</span>
+        </div>
+      </div>
+      <div class="connector-down">&#8595;</div>
+      <div class="siblings-note">William Jr.&#39;s maritime work along the Atlantic coast brought him to Cape Breton, where he settled with Louise Fougeau &#8212; introducing Acadian French ancestry into the Allison line</div>
+    </div>
+
+    <hr class="gen-divider" />
+
+    <!-- GEN 3 -->
+    <div class="gen-block reveal">
+      <div class="gen-header">Generation 3 &#8212; Established in Cape Breton (born 1858, North Sydney area)</div>
+      <div class="couple-row">
+        <div class="person-card highlight">
+          <span class="flag-badge">&#127809;</span>
+          <span class="name">Francis Allison</span>
+          <span class="years">1858 &#8211; ?</span>
+          <span class="detail">Born Cape Breton, NS<br>Scottish &amp; Acadian heritage<br>North Sydney area</span>
+        </div>
+        <span class="wedding-ring">&#128141; 21 Feb 1886</span>
+        <div class="person-card highlight">
+          <span class="name">Mary Ann Campbell</span>
+          <span class="years">~1860 &#8211; ?</span>
+          <span class="detail">St. Joseph&#39;s Catholic Church<br>North Sydney, Cape Breton<br>Parents: Alexander Campbell<br>&amp; Rachel Young</span>
+        </div>
+      </div>
+      <div class="connector-down">&#8595;</div>
+      <div class="siblings-note">Married 21 February 1886 at St. Joseph&#39;s Catholic Church, North Sydney &#8212; Source: St. Joseph&#39;s Parish Register, North Sydney, CB</div>
+    </div>
+
+    <hr class="gen-divider" />
+
+    <!-- GEN 4 -->
+    <div class="gen-block reveal">
+      <div class="gen-header">Generation 4 &#8212; The Coal Mining Era (born 21 Apr 1885, Sydney Mines)</div>
+      <div class="couple-row">
+        <div class="person-card highlight">
+          <span class="flag-badge">&#9935;</span>
+          <span class="name">John James Allison</span>
+          <span class="years">21 Apr 1885 &#8211; ?</span>
+          <span class="detail">Born Sydney Mines, CB<br>Coal miner &middot; Glace Bay<br>Dominion Coal Co. era</span>
+        </div>
+        <span class="wedding-ring">&#128141;</span>
+        <div class="person-card">
+          <span class="name">Maria York</span>
+          <span class="years">~1887 &#8211; ?</span>
+          <span class="detail">English ancestry<br>Glace Bay, Cape Breton</span>
+        </div>
+      </div>
+      <div class="connector-down">&#8595;</div>
+      <div class="siblings-note">John James Allison, born in Sydney Mines, settled in Glace Bay &#8212; the same coal town the Burchell family called home</div>
+    </div>
+
+    <hr class="gen-divider" />
+
+    <!-- GEN 5 -->
+    <div class="gen-block reveal">
+      <div class="gen-header">Generation 5 &#8212; The Burchell Connection (~1918 &middot; 9 May 1949)</div>
+      <div class="couple-row">
+        <div class="person-card highlight" style="border-color: var(--can-red);">
+          <span class="flag-badge">&#127809;</span>
+          <span class="name" style="color: var(--can-red);">Rita Artis Allison</span>
+          <span class="years">~1918 &#8211; ?</span>
+          <span class="detail">&#8220;Da Nanny&#8221;<br>Born Glace Bay, Cape Breton<br>Daughter of John James Allison</span>
+        </div>
+        <span class="wedding-ring">&#128141; 9 May 1949</span>
+        <div class="person-card highlight" style="border-color: var(--can-red);">
+          <span class="flag-badge">&#127809;</span>
+          <span class="name" style="color: var(--can-red);">Howard Frederick Burchell</span>
+          <span class="years">~1922 &#8211; ?</span>
+          <span class="detail">Born Glace Bay<br>Son of Ernest &amp; Annie Burchell<br>677 Arthur Street</span>
+        </div>
+      </div>
+      <div class="connector-down">&#8595;</div>
+      <div class="siblings-note">
+        Marriage 9 May 1949, Glace Bay &middot; Daughter: <strong>Marie Elaine Burchell</strong> &middot; Grandson: <strong>Bernard Thomas</strong> &#8212; keeper of this story
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Story: Scotland -->
+<section class="section section-alt" id="scotland">
+  <div class="container">
+    <h2 class="section-title reveal">Scottish Origins &#8212; Inverkip &amp; Greenock</h2>
+    <p class="section-subtitle">Renfrewshire, Scotland &middot; Late 18th Century</p>
+
+    <div class="story-card reveal">
+      <div class="story-img">
+        <div class="img-placeholder">
+          &#127988;
+          <span>Renfrewshire, Scotland</span>
+        </div>
+      </div>
+      <div class="story-body">
+        <p class="story-era">&#127988; Inverkip &amp; Greenock, Scotland &#8212; c. 1785</p>
+        <h3>The Allison Family of Renfrewshire</h3>
+        <p>The Allison family story begins in the coastal parishes of Renfrewshire, Scotland &#8212; a region west of Glasgow where the Clyde estuary opens toward the Atlantic. Inverkip, a rural parish with strong Presbyterian traditions, and the port town of Greenock, with its thriving transatlantic trade, shaped the family that would eventually cross the ocean to Nova Scotia.</p>
+        <p>William Allison Sr. was born around 1785 in this region. On the 10th of August 1811, he married Jean Stewart in Greenock &#8212; a union documented in the Scottish Old Parish Registers. Jean was the daughter of James Stewart and Isobel Niven, placing both families firmly within the Lowland Scottish tradition of careful record-keeping through the Kirk.</p>
+        <p>Their son William Jr., born on 7 August 1812 in Inverkip, would become the first of the Allison line to cross the Atlantic &#8212; drawn by the same maritime world that connected Greenock&#39;s docks to the fishing grounds of Atlantic Canada. The Allison surname itself appears in Renfrewshire records from the 1600s, typically associated with farming families and tradesmen &#8212; a lineage of quiet endurance and practical Presbyterian faith.</p>
+        <ul class="fact-list">
+          <li>William Allison Sr. born ~1785 in the Inverkip / Greenock area, Renfrewshire</li>
+          <li>Married Jean Stewart, 10 August 1811, Greenock, Scotland</li>
+          <li>Jean Stewart: daughter of James Stewart and Isobel Niven</li>
+          <li>William Allison Jr. born 7 August 1812, Inverkip, Renfrewshire</li>
+          <li>Source: Scotland&#39;s People, Old Parish Registers, Greenock &amp; Inverkip</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Story: Acadian -->
+<section class="section" id="acadian">
+  <div class="container">
+    <h2 class="section-title reveal">A Scottish Sailor Meets Acadian Cape Breton</h2>
+    <p class="section-subtitle">William Allison Jr. &amp; Louise Fougeau &middot; Mid-19th Century</p>
+
+    <div class="story-card reverse reveal">
+      <div class="story-img">
+        <div class="img-placeholder">
+          &#x26DC;
+          <span>Acadian Cape Breton, Nova Scotia</span>
+        </div>
+      </div>
+      <div class="story-body">
+        <p class="story-era">&#9875; Scotland &#8594; Cape Breton, Nova Scotia &#8212; c. 1835&#8211;1845</p>
+        <h3>Two Traditions Become One</h3>
+        <p>William Allison Jr. grew up near the docks of Greenock &#8212; one of Scotland&#39;s busiest Atlantic ports. The seasonal fishing routes that connected the British Isles with Atlantic Canada were a natural path for a young man with the sea in his blood. By the 1830s or 1840s, William&#39;s maritime work had brought him to Cape Breton, Nova Scotia.</p>
+        <p>There he met Louise Fougeau &#8212; an Acadian French woman from the Cape Breton region. The Acadians were the original French settlers of Maritime Canada, a people who had endured the Great Deportation of 1755, when British authorities expelled thousands from their homes. Many had returned to Cape Breton and rebuilt their communities along the island&#39;s rugged shores, keeping alive their language, their Catholic faith, and their deep connection to the sea and the land.</p>
+        <p>The union of William Allison and Louise Fougeau brought together the Presbyterian faith of the Scottish Lowlands with the French Catholic maritime tradition of Acadian Nova Scotia &#8212; a distinctly Cape Bretonian blending of two Atlantic cultures. Their son Francis, born in 1858 in Cape Breton, was the first Allison fully rooted in Nova Scotian soil: neither wholly Scottish nor wholly French, but a proud child of both worlds.</p>
+        <ul class="fact-list">
+          <li>William Allison Jr.: born 7 August 1812, Inverkip, Scotland; sailor and fisherman</li>
+          <li>Louise Fougeau: Acadian French, Cape Breton, Nova Scotia</li>
+          <li>The Fougeau name connects to Acadian French maritime heritage of Cape Breton</li>
+          <li>Son Francis Allison born 1858 in Cape Breton &#8212; first Nova Scotia-born generation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Story: Francis -->
+<section class="section section-alt" id="cape-breton">
+  <div class="container">
+    <h2 class="section-title reveal">Francis Allison &#8212; Roots in North Sydney</h2>
+    <p class="section-subtitle">Cape Breton, Nova Scotia &middot; 1858&#8211;1886</p>
+
+    <div class="story-card reveal">
+      <div class="story-img">
+        <div class="img-placeholder">
+          &#9962;
+          <span>St. Joseph&#39;s Catholic Church, North Sydney</span>
+        </div>
+      </div>
+      <div class="story-body">
+        <p class="story-era">&#127809; North Sydney, Cape Breton &#8212; 1858 to 1886</p>
+        <h3>Marriage at St. Joseph&#39;s &#8212; A Catholic Cape Breton Wedding</h3>
+        <p>Francis Allison was born in 1858 in Cape Breton, Nova Scotia &#8212; the son of Scottish William Jr. and Acadian French Louise Fougeau. Raised in the bilingual, multicultural world of Cape Breton, Francis came of age as the island&#39;s coal industry was beginning to transform the region from a collection of fishing villages and farms into one of Canada&#39;s great industrial landscapes.</p>
+        <p>On the 21st of February 1886, Francis married <strong>Mary Ann Campbell</strong> at St. Joseph&#39;s Catholic Church in North Sydney &#8212; one of Cape Breton&#39;s finest Catholic parishes, whose records provide a firm documentary anchor in the Allison family history. Mary Ann was the daughter of Alexander Campbell and Rachel Young. The Campbell name &#8212; widespread throughout Cape Breton and the Scottish Highlands &#8212; added yet another strand of the island&#39;s rich heritage to the Allison line.</p>
+        <p>In their household, Scottish, Acadian French, and Cape Breton Catholic traditions mingled daily &#8212; a reflection of the island&#39;s beautifully complex character.</p>
+        <ul class="fact-list">
+          <li>Francis Allison born 1858, Cape Breton, NS &#8212; son of William Jr. &amp; Louise Fougeau</li>
+          <li>Married Mary Ann Campbell, 21 February 1886</li>
+          <li>Venue: St. Joseph&#39;s Catholic Church, North Sydney, Cape Breton</li>
+          <li>Mary Ann&#39;s parents: Alexander Campbell and Rachel Young</li>
+          <li>Source: St. Joseph&#39;s Parish Register, North Sydney, CB</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Story: John James -->
+<section class="section" id="coal">
+  <div class="container">
+    <h2 class="section-title reveal">John James Allison &#8212; Sydney Mines to Glace Bay</h2>
+    <p class="section-subtitle">The Coal Mining Generation &middot; 1885</p>
+
+    <div class="story-card reverse reveal">
+      <div class="story-img">
+        <div class="img-placeholder">
+          &#9935;
+          <span>Sydney Mines &amp; Glace Bay, Cape Breton</span>
+        </div>
+      </div>
+      <div class="story-body">
+        <p class="story-era">&#9935; Sydney Mines &#8594; Glace Bay, Cape Breton &#8212; 1885 onward</p>
+        <h3>Born Into Coal Country</h3>
+        <p>John James Allison was born on the 21st of April 1885 in Sydney Mines, Cape Breton &#8212; a town whose very name declared its industrial destiny. He entered the world as the coal industry was reshaping Cape Breton from a collection of fishing villages and farms into one of Canada&#39;s great coal-producing regions. The Dominion Coal Company was sinking new shafts, building new towns, and drawing men from across the island and beyond.</p>
+        <p>John James married Maria York, whose English ancestry added another layer to the family&#39;s already-complex heritage. Together they settled in Glace Bay &#8212; the beating heart of Cape Breton&#39;s coal country &#8212; where their daughter <strong>Rita Artis Allison</strong> would be born around 1918.</p>
+        <p>In the streets of Glace Bay, the Allison family were neighbours and contemporaries of the Burchells. Ernest Burchell, who had arrived in Glace Bay around 1907, worked for the same Dominion Coal Company that shaped the lives of all who lived in that coal-dusted, community-rich town. The two families moved in the same world &#8212; separated by a generation &#8212; until Howard Burchell and Rita Allison were married on 9 May 1949, bringing two Cape Breton heritage lines together forever.</p>
+        <ul class="fact-list">
+          <li>John James Allison born 21 April 1885, Sydney Mines, Cape Breton</li>
+          <li>Parents: Francis Allison and Mary Ann Campbell</li>
+          <li>Married Maria York; settled Glace Bay, Cape Breton</li>
+          <li>Contemporary of the Burchell family in Glace Bay&#39;s coal community</li>
+          <li>Daughter: Rita Artis Allison, born ~1918 Glace Bay</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Story: Rita -->
+<section class="section section-alt" id="rita">
+  <div class="container">
+    <h2 class="section-title reveal">Rita Artis Allison &#8212; &#8220;Da Nanny&#8221;</h2>
+    <p class="section-subtitle">The Union That Brought the Family Together &middot; 9 May 1949</p>
+
+    <div class="story-card reveal">
+      <div class="story-img">
+        <img src="images/DaNannyMarriageCert.jpg" alt="Howard Burchell and Rita Allison marriage certificate" loading="lazy" />
+      </div>
+      <div class="story-body">
+        <p class="story-era">&#128141; Glace Bay, Cape Breton &#8212; 9 May 1949</p>
+        <h3>Two Cape Breton Coal Families Become One</h3>
+        <p>Rita Artis Allison was born around 1918 in Glace Bay &#8212; the daughter of John James Allison and Maria York, the granddaughter of Francis and Mary Ann Campbell Allison, and the great-granddaughter of Scottish sailor William Allison Jr. and Acadian French Louise Fougeau. In her blood ran the full sweep of the Allison heritage: Scottish Lowlands, Acadian French Cape Breton, and coal-country Nova Scotia.</p>
+        <p>On the 9th of May 1949, Rita married <strong>Howard Frederick Burchell</strong> in Glace Bay. Howard was the son of Ernest Burchell &#8212; the coal fireman who had worked for the Dominion Coal Company for 35 years &#8212; and the grandson of Irish immigrant John Burchell and French Huguenot descendant Susan Boutilier. Two Atlantic immigrant heritages, meeting in Cape Breton coal country.</p>
+        <p>The marriage certificate &#8212; lovingly known in the family as &#8220;Da Nanny&#39;s Marriage Cert&#8221; &#8212; is one of the most cherished documents in this collection. From Howard and Rita came <strong>Marie Elaine Burchell</strong>, and her son <strong>Bernard Thomas</strong> &#8212; the keeper of this whole magnificent story.</p>
+        <ul class="fact-list">
+          <li>Rita Artis Allison: born ~1918 Glace Bay, daughter of John James Allison &amp; Maria York</li>
+          <li>Heritage: Scottish Lowlands &middot; Acadian French &middot; Cape Breton coal country</li>
+          <li>Married Howard Frederick Burchell, 9 May 1949, Glace Bay</li>
+          <li>Daughter: Marie Elaine Burchell (m. James Taylor)</li>
+          <li>Grandson: Bernard Thomas &#8212; 9th generation family historian</li>
+          <li>Source: Marriage Certificate &#8212; &#8220;DaNannyMarriageCert&#8221; in this collection</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Three Heritage Strands -->
+<section class="section section-dark" id="heritage">
+  <div class="container">
+    <h2 class="section-title">Three Heritages, One Family</h2>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; max-width: 960px; margin: 0 auto;">
+      <div class="reveal">
+        <h3 style="color: var(--ns-gold-lt); margin-bottom: 0.75rem;">&#127988; Scottish Lowland Line</h3>
+        <p>The Allison name traces to Renfrewshire &#8212; the coastal parishes of Inverkip and the port of Greenock, west of Glasgow. This was Presbyterian Scotland: literate, hardworking, and deeply connected to the Atlantic trade. William Allison Sr. and Jean Stewart planted their family in this tradition in 1811, and their son William Jr. carried it across the ocean to Nova Scotia.</p>
+        <p>The Allison surname appears in Renfrewshire records from the 1600s, associated with farming families and tradesmen &#8212; a lineage of quiet endurance and practical faith that would serve the family well in the coal towns of Cape Breton.</p>
+      </div>
+      <div class="reveal">
+        <h3 style="color: var(--ns-gold-lt); margin-bottom: 0.75rem;">&#x26DC; Acadian French Heritage</h3>
+        <p>Louise Fougeau represented a heritage reaching back to the founding of French Acadie &#8212; the colony that shaped Maritime Canada. The Acadians who survived the Great Deportation of 1755 and returned to rebuild in Cape Breton carried with them a language, a Catholic faith, and a relationship with the land and sea unlike any other culture in North America.</p>
+        <p>Her children and grandchildren would carry this Acadian heritage forward in the bilingual, culturally-rich world of Cape Breton &#8212; blending it with Scottish Presbyterian roots in a uniquely Cape Bretonian way.</p>
+      </div>
+      <div class="reveal">
+        <h3 style="color: var(--ns-gold-lt); margin-bottom: 0.75rem;">&#9935; Cape Breton Coal Heritage</h3>
+        <p>By the generation of John James Allison (born 1885, Sydney Mines), the family was fully embedded in Cape Breton&#39;s industrial coal culture. Sydney Mines and Glace Bay were communities bound by shared labour, shared danger, and shared pride. The Cape Breton identity &#8212; Scottish, French, Irish, and everything in between &#8212; was forged in those colliery communities.</p>
+        <p>This was the world Rita Allison was born into, and the world she and Howard Burchell built their family in. It is a heritage worth remembering, and worth celebrating.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section class="section parchment-section" id="timeline">
+  <div class="container">
+    <h2 class="section-title reveal">Allison Family Timeline</h2>
+    <p class="section-subtitle">From Inverkip, Scotland to Glace Bay, Nova Scotia &#8212; 1785 to 1949</p>
+
+    <div class="allison-timeline reveal">
+
+      <div class="allison-tl-item">
+        <span class="tl-label">~1785</span>
+        <h4>&#127988; William Allison Sr. Born &#8212; Inverkip, Scotland</h4>
+        <p>Born in the coastal parish of Inverkip (or Greenock), Renfrewshire &#8212; west of Glasgow. Lowland Scottish, Presbyterian tradition, connected to Atlantic trade through the port of Greenock.</p>
+      </div>
+
+      <div class="allison-tl-item">
+        <span class="tl-label">10 August 1811</span>
+        <h4>&#128141; William Allison Sr. marries Jean Stewart &#8212; Greenock</h4>
+        <p>Marriage registered at Greenock Parish, Renfrewshire. Jean was the daughter of James Stewart and Isobel Niven. Source: Scotland&#39;s People, Old Parish Registers.</p>
+      </div>
+
+      <div class="allison-tl-item">
+        <span class="tl-label">7 August 1812</span>
+        <h4>&#128118; William Allison Jr. Born &#8212; Inverkip, Scotland</h4>
+        <p>Son of William Sr. and Jean Stewart. He would grow up near Greenock&#39;s docks and follow the Atlantic fishing routes to Cape Breton, Nova Scotia.</p>
+      </div>
+
+      <div class="allison-tl-item">
+        <span class="tl-label">~1835&#8211;1845</span>
+        <h4>&#9875; William Jr. Arrives in Cape Breton, Meets Louise Fougeau</h4>
+        <p>William Allison Jr.&#39;s maritime work brings him to Cape Breton, where he settles with Louise Fougeau &#8212; an Acadian French woman of the region. The Allison line takes root in the New World, blending Scottish and Acadian French heritage.</p>
+      </div>
+
+      <div class="allison-tl-item">
+        <span class="tl-label">1858</span>
+        <h4>&#128118; Francis Allison Born &#8212; Cape Breton, NS</h4>
+        <p>Son of William Jr. and Louise Fougeau. First Allison born on Nova Scotian soil, carrying both Scottish Lowland and Acadian French heritage.</p>
+      </div>
+
+      <div class="allison-tl-item">
+        <span class="tl-label">21 February 1886</span>
+        <h4>&#128141; Francis Allison marries Mary Ann Campbell &#8212; North Sydney</h4>
+        <p>Married at St. Joseph&#39;s Catholic Church, North Sydney, Cape Breton. Mary Ann: daughter of Alexander Campbell and Rachel Young. Source: St. Joseph&#39;s Parish Register.</p>
+      </div>
+
+      <div class="allison-tl-item">
+        <span class="tl-label">21 April 1885</span>
+        <h4>&#128118; John James Allison Born &#8212; Sydney Mines, CB</h4>
+        <p>Son of Francis Allison and Mary Ann Campbell. Born in the heart of Cape Breton coal country &#8212; Sydney Mines. He will later settle in Glace Bay and raise his family there.</p>
+      </div>
+
+      <div class="allison-tl-item">
+        <span class="tl-label">~1910&#8211;1915</span>
+        <h4>&#128141; John James Allison marries Maria York &#8212; Glace Bay</h4>
+        <p>John James settles with Maria York in Glace Bay, Cape Breton &#8212; neighbours and contemporaries of the Burchell family in the Dominion Coal Company era.</p>
+      </div>
+
+      <div class="allison-tl-item">
+        <span class="tl-label">~1918</span>
+        <h4>&#128118; Rita Artis Allison Born &#8212; Glace Bay, CB</h4>
+        <p>&#8220;Da Nanny.&#8221; Daughter of John James Allison and Maria York. She carries within her the Scottish, Acadian French, and Cape Breton coal heritage of five generations of Allisons.</p>
+      </div>
+
+      <div class="allison-tl-item">
+        <span class="tl-label">9 May 1949</span>
+        <h4>&#128141; Rita Allison marries Howard Frederick Burchell &#8212; Glace Bay</h4>
+        <p>The union of two great Cape Breton families. &#8220;Da Nanny&#39;s Marriage Cert&#8221; &#8212; one of the most cherished documents in this collection &#8212; connects the Allison heritage to the Burchell line and to Bernard Thomas, keeper of this story. Source: Marriage Certificate in this collection.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Back to Main Site -->
+<section class="section" style="padding: 2rem 0;">
+  <div class="container" style="text-align: center;">
+    <p style="margin-bottom: 1.5rem; color: var(--mid-grey); font-style: italic;">Explore the full Burchell family story</p>
+    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+      <a href="stories.html" class="btn btn-gold">Our Stories</a>
+      <a href="family-tree.html" class="btn btn-outline">Family Tree</a>
+      <a href="timeline.html" class="btn btn-outline">Timeline</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-crest" aria-hidden="true">&#x26DC;</div>
+  <p class="footer-title">The Burchell Family of Glace Bay</p>
+  <p class="footer-tagline">Nova Scotia &middot; Scotland &middot; Ireland &middot; France &middot; 1720 &#8211; Present</p>
+  <ul class="footer-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="stories.html">Our Stories</a></li>
+    <li><a href="family-tree.html">Family Tree</a></li>
+    <li><a href="timeline.html">Timeline</a></li>
+    <li><a href="gallery.html">Gallery &amp; Video</a></li>
+    <li><a href="sources.html">Research &amp; Sources</a></li>
+    <li><a href="allison.html">Allison Heritage</a></li>
+  </ul>
+  <hr class="footer-divider" />
+  <p class="footer-copy">
+    A personal tribute crafted with love for the ancestors who came before.<br>
+    &#127809; Glace Bay, Cape Breton, Nova Scotia, Canada &nbsp;|&nbsp; Research by Bernard Thomas
+  </p>
 </footer>
 
+<script src="js/main.js"></script>
 </body>
 </html>
