@@ -37,15 +37,11 @@ Family members can leave comments on the home page. Comments include a built-in 
 4. Go to **Project Settings** (gear icon) → **General** → scroll to **Your apps** → click the **`</>`** (Web) icon.
    - Register the app (any nickname), click **Register app**.
    - Copy the `firebaseConfig` object shown on screen.
-5. Open `js/comments.js` in this repo and replace the placeholder `FIREBASE_CONFIG` at the top with your copied values:
+5. Open `js/comments.js` in this repo and replace the placeholder `FIREBASE_CONFIG` at the top with your values:
    ```js
    const FIREBASE_CONFIG = {
-     apiKey:            "AIzaSy...",
-     authDomain:        "your-project.firebaseapp.com",
-     projectId:         "your-project",
-     storageBucket:     "your-project.appspot.com",
-     messagingSenderId: "123456789",
-     appId:             "1:123...:web:abc..."
+     apiKey:    "AIzaSy...",      // Web API Key from Project Settings
+     projectId: "your-project"   // Project ID from Project Settings
    };
    ```
 6. In the Firebase console, go to **Firestore Database → Rules** and replace the default rules with:
