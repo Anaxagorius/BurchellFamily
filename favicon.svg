@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Navy background -->
+  <rect width="32" height="32" rx="4" fill="#00274C"/>
+  <!-- Gold border -->
+  <rect x="1.5" y="1.5" width="29" height="29" rx="3" fill="none" stroke="#C8A035" stroke-width="1.5"/>
+  <!-- Fleur-de-lis / Burchell crest symbol -->
+  <text x="16" y="24" font-family="serif" font-size="20" text-anchor="middle" fill="#F0C860">⚜</text>
+</svg>
