@@ -149,6 +149,129 @@
     .allison-tl-item h4 { margin: 0.25rem 0 0.35rem; color: var(--ns-navy); font-size: 1rem; }
     .allison-tl-item p  { margin: 0; font-size: 0.9rem; color: #444; }
 
+    .doc-feature {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-bottom: 4rem;
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 3px 16px var(--shadow);
+    }
+
+    .doc-feature.reverse .doc-feature-img { order: 2; }
+    .doc-feature.reverse .doc-feature-text { order: 1; }
+
+    .doc-feature-img {
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 400px;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .doc-feature-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.3s;
+    }
+
+    .doc-feature-img:hover img { transform: scale(1.03); }
+
+    .doc-feature-img .zoom-hint {
+      position: absolute;
+      bottom: 0.75rem;
+      right: 0.75rem;
+      background: rgba(0,0,0,0.65);
+      color: var(--ns-gold-lt);
+      font-size: 0.78rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 3px;
+    }
+
+    .doc-feature-text {
+      padding: 2.5rem 2rem 2.5rem 2.5rem;
+    }
+
+    .doc-feature-text .doc-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--can-red);
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    .doc-feature-text h3 { color: var(--ns-navy); margin-bottom: 0.75rem; }
+
+    .doc-detail-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 1rem 0;
+    }
+    .doc-detail-table th {
+      text-align: left;
+      padding: 0.4rem 0.75rem;
+      background: var(--parchment);
+      color: var(--ns-navy);
+      font-weight: bold;
+      white-space: nowrap;
+    }
+    .doc-detail-table td {
+      padding: 0.4rem 0.75rem;
+      border-bottom: 1px solid var(--parchment-dk);
+      color: #444;
+    }
+    .doc-detail-table tr:last-child td { border-bottom: none; }
+
+    @media (max-width: 768px) {
+      .doc-feature { grid-template-columns: 1fr; }
+      .doc-feature.reverse .doc-feature-img,
+      .doc-feature.reverse .doc-feature-text { order: unset; }
+      .doc-feature-text { padding: 1.5rem; }
+      .doc-feature-img { min-height: 280px; }
+    }
+
+    .doc-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .doc-gallery-item {
+      background: #fff;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px var(--shadow);
+      cursor: pointer;
+    }
+
+    .doc-gallery-item img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      background: #111;
+      display: block;
+      transition: transform 0.3s;
+    }
+
+    .doc-gallery-item:hover img { transform: scale(1.03); }
+
+    .doc-gallery-caption {
+      padding: 0.6rem 0.75rem;
+      font-size: 0.82rem;
+      color: #444;
+      border-top: 1px solid var(--parchment-dk);
+    }
+
     .side-note {
       max-width: 680px;
       margin: 1.5rem auto;
@@ -647,6 +770,137 @@
   </div>
 </section>
 
+<!-- Primary Documents -->
+<section class="section parchment-section" id="documents">
+  <div class="container">
+    <h2 class="section-title reveal">Primary Documents</h2>
+    <p class="section-subtitle">Original records from the Allison family archive — baptisms, marriages, censuses, and vital records</p>
+
+    <!-- Featured: William Allison Jr. Baptism -->
+    <div class="doc-feature reveal">
+      <div class="doc-feature-img" data-gallery-img="images/William_Allison_Baptism.jpg" data-gallery-cap="Baptism Record — William Allison Jr., 7 August 1812, Inverkip, Renfrewshire, Scotland">
+        <img src="images/William_Allison_Baptism.jpg" alt="Baptism record of William Allison Jr., 7 August 1812, Inverkip, Scotland" loading="lazy" />
+        <span class="zoom-hint">🔍 Click to enlarge</span>
+      </div>
+      <div class="doc-feature-text">
+        <p class="doc-label">📄 Baptism Record · 1812</p>
+        <h3>William Allison Jr. — Baptism, Inverkip 1812</h3>
+        <p>The Old Parish Register entry for the baptism of <strong>William Allison Jr.</strong>, born and baptised on <strong>7 August 1812</strong> in Inverkip, Renfrewshire, Scotland. Son of William Allison Sr. and Jean Stewart (née daughter of James Stewart and Isobel Niven).</p>
+        <p>William Jr. grew up near the Atlantic port of Greenock and became a sailor, following the fishing routes across the ocean to Nova Scotia. He settled in Cape Breton, where he met and married <strong>Louise Fougeau</strong> — an Acadian French woman — blending the Scottish Lowland and French Acadian heritages that would define the Allison line in Canada.</p>
+        <table class="doc-detail-table">
+          <tr><th>Name</th><td>William Allison Jr.</td></tr>
+          <tr><th>Baptism</th><td>7 August 1812, Inverkip, Renfrewshire</td></tr>
+          <tr><th>Father</th><td>William Allison Sr.</td></tr>
+          <tr><th>Mother</th><td>Jean Stewart</td></tr>
+          <tr><th>Archive</th><td>Scotland's People, Old Parish Registers, Inverkip</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Featured: Francis Allison & Mary Ann Campbell Marriage -->
+    <div class="doc-feature reverse reveal">
+      <div class="doc-feature-text">
+        <p class="doc-label">📄 Parish Register · 1886</p>
+        <h3>Francis Allison &amp; Mary Ann Campbell — 1886</h3>
+        <p>The parish register entry for the marriage of <strong>Francis Allison</strong> (born 1858, Cape Breton, son of William Jr. and Louise Fougeau) and <strong>Mary Ann Campbell</strong> (daughter of Alexander Campbell and Rachel Young), married on <strong>21 February 1886</strong> at <strong>St. Joseph's Catholic Church</strong>, North Sydney, Cape Breton.</p>
+        <p>This record places the Allison family firmly in Cape Breton's Catholic community. Their son John James Allison would be born the following year in Sydney Mines — the grandfather of <strong>Rita Artis Allison</strong>, who married Howard Burchell in 1949.</p>
+        <table class="doc-detail-table">
+          <tr><th>Groom</th><td>Francis Allison, born 1858, Cape Breton</td></tr>
+          <tr><th>Bride</th><td>Mary Ann Campbell</td></tr>
+          <tr><th>Date</th><td>21 February 1886</td></tr>
+          <tr><th>Venue</th><td>St. Joseph's Catholic Church, North Sydney, CB</td></tr>
+          <tr><th>Bride's parents</th><td>Alexander Campbell &amp; Rachel Young</td></tr>
+          <tr><th>Archive</th><td>St. Joseph's Parish Register, North Sydney</td></tr>
+        </table>
+      </div>
+      <div class="doc-feature-img" data-gallery-img="images/Francis_Mary_Marriage.jpg" data-gallery-cap="Parish Register — Francis Allison &amp; Mary Ann Campbell, 21 February 1886, St. Joseph's Catholic Church, North Sydney">
+        <img src="images/Francis_Mary_Marriage.jpg" alt="Parish register entry for Francis Allison and Mary Ann Campbell, North Sydney 1886" loading="lazy" />
+        <span class="zoom-hint">🔍 Click to enlarge</span>
+      </div>
+    </div>
+
+    <!-- Featured: Francis Allison & Louise Fougeau Marriage -->
+    <div class="doc-feature reveal">
+      <div class="doc-feature-img" data-gallery-img="images/Francis_Louise_marriage.jpg" data-gallery-cap="Marriage Record — Francis Allison &amp; Louise Fougeau — the union that brought Scottish and Acadian French heritage together in Cape Breton">
+        <img src="images/Francis_Louise_marriage.jpg" alt="Marriage record of Francis Allison and Louise Fougeau" loading="lazy" />
+        <span class="zoom-hint">🔍 Click to enlarge</span>
+      </div>
+      <div class="doc-feature-text">
+        <p class="doc-label">📄 Marriage Record · c. 1835–1845</p>
+        <h3>William Allison Jr. &amp; Louise Fougeau — Marriage Record</h3>
+        <p>The marriage record of <strong>William Allison Jr.</strong> and <strong>Louise Fougeau</strong> — the pivotal union that brought the Scottish Lowland and Acadian French heritages together in Cape Breton, Nova Scotia. William, the son of a Renfrewshire sailor, followed the Atlantic fishing routes to Cape Breton, where he settled with Louise — an Acadian French woman of the region.</p>
+        <p>Their son <strong>Francis Allison</strong> (born 1858) was the first Allison fully rooted in Nova Scotian soil, carrying within him both the Presbyterian tradition of Renfrewshire and the Catholic Acadian heritage of Cape Breton's French communities.</p>
+        <table class="doc-detail-table">
+          <tr><th>Groom</th><td>William Allison Jr. (born 1812, Inverkip, Scotland)</td></tr>
+          <tr><th>Bride</th><td>Louise Fougeau (Acadian French, Cape Breton)</td></tr>
+          <tr><th>Settled</th><td>Cape Breton, Nova Scotia</td></tr>
+          <tr><th>Children</th><td>Francis Allison (born 1858, Cape Breton)</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Additional Records Grid -->
+    <h3 class="reveal" style="color: var(--ns-navy); margin: 2.5rem 0 1rem; font-size: 1.15rem; border-bottom: 2px solid var(--ns-gold); padding-bottom: 0.4rem;">Additional Records</h3>
+    <div class="doc-gallery-grid reveal">
+
+      <div class="doc-gallery-item" data-gallery-img="images/William_Allison_Family.jpg" data-gallery-cap="The William Allison Family — Cape Breton, Nova Scotia">
+        <img src="images/William_Allison_Family.jpg" alt="The William Allison family, Cape Breton" loading="lazy" />
+        <div class="doc-gallery-caption">William Allison Family — Cape Breton</div>
+      </div>
+
+      <div class="doc-gallery-item" data-gallery-img="images/William_Allison_1861_census.png" data-gallery-cap="1861 Census — William Allison, Cape Breton, Nova Scotia">
+        <img src="images/William_Allison_1861_census.png" alt="1861 census entry for William Allison" loading="lazy" />
+        <div class="doc-gallery-caption">1861 Census — William Allison</div>
+      </div>
+
+      <div class="doc-gallery-item" data-gallery-img="images/Francis_and_Lousie_marriage_registry..jpg" data-gallery-cap="Marriage Registry — Francis Allison &amp; Louise Fougeau (alternate view)">
+        <img src="images/Francis_and_Lousie_marriage_registry..jpg" alt="Marriage registry for Francis Allison and Louise Fougeau, alternate view" loading="lazy" />
+        <div class="doc-gallery-caption">Francis &amp; Louise — Marriage Registry (alternate)</div>
+      </div>
+
+      <div class="doc-gallery-item" data-gallery-img="images/John_Allison_1rst_marriage.jpg" data-gallery-cap="First Marriage Record — John James Allison (born 21 Apr 1885, Sydney Mines)">
+        <img src="images/John_Allison_1rst_marriage.jpg" alt="First marriage record of John James Allison" loading="lazy" />
+        <div class="doc-gallery-caption">John James Allison — First Marriage Record</div>
+      </div>
+
+      <div class="doc-gallery-item" data-gallery-img="images/James_Allison_Birth.jpg" data-gallery-cap="Birth Record — James Allison, Cape Breton">
+        <img src="images/James_Allison_Birth.jpg" alt="Birth record of James Allison" loading="lazy" />
+        <div class="doc-gallery-caption">James Allison — Birth Record</div>
+      </div>
+
+      <div class="doc-gallery-item" data-gallery-img="images/John_James_Allison_Death.jpg" data-gallery-cap="Death Record — John James Allison (born 21 Apr 1885, Sydney Mines; father of Rita Artis Allison)">
+        <img src="images/John_James_Allison_Death.jpg" alt="Death record of John James Allison" loading="lazy" />
+        <div class="doc-gallery-caption">John James Allison — Death Record</div>
+      </div>
+
+      <div class="doc-gallery-item" data-gallery-img="images/Frank_James_Allison_Death.jpg" data-gallery-cap="Death Record — Frank James Allison">
+        <img src="images/Frank_James_Allison_Death.jpg" alt="Death record of Frank James Allison" loading="lazy" />
+        <div class="doc-gallery-caption">Frank James Allison — Death Record</div>
+      </div>
+
+      <div class="doc-gallery-item" data-gallery-img="images/John_J_Allison_1yo_Death.jpg" data-gallery-cap="Death Record — John J. Allison, died in infancy (aged 1 year)">
+        <img src="images/John_J_Allison_1yo_Death.jpg" alt="Death record of John J. Allison, died aged 1" loading="lazy" />
+        <div class="doc-gallery-caption">John J. Allison — Infant Death (age 1)</div>
+      </div>
+
+      <div class="doc-gallery-item" data-gallery-img="images/Mrs_Phillip_Allison_Death.jpg" data-gallery-cap="Death Record — Mrs. Phillip Allison">
+        <img src="images/Mrs_Phillip_Allison_Death.jpg" alt="Death record of Mrs. Phillip Allison" loading="lazy" />
+        <div class="doc-gallery-caption">Mrs. Phillip Allison — Death Record</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="modal-overlay" role="dialog" aria-label="Image viewer">
+  <div class="modal-img-wrap">
+    <button class="modal-close" aria-label="Close image viewer">✕</button>
+    <img src="" alt="Enlarged document" />
+    <p class="modal-caption"></p>
+  </div>
+</div>
+
 <!-- Back to Main Site -->
 <section class="section" style="padding: 2rem 0;">
   <div class="container" style="text-align: center;">
@@ -683,5 +937,39 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script>
+  // Feature doc and doc-gallery-item click-to-enlarge
+  (function () {
+    const overlay = document.querySelector('.modal-overlay');
+    if (!overlay) return;
+    const modalImg = overlay.querySelector('img');
+    const modalCap = overlay.querySelector('.modal-caption');
+    const closeBtn = overlay.querySelector('.modal-close');
+
+    function openModal(src, cap) {
+      modalImg.src = src;
+      if (modalCap) modalCap.textContent = cap || '';
+      overlay.classList.add('open');
+    }
+
+    document.querySelectorAll('[data-gallery-img]').forEach(el => {
+      el.style.cursor = 'pointer';
+      el.addEventListener('click', () => openModal(el.dataset.galleryImg, el.dataset.galleryCap));
+    });
+
+    document.querySelectorAll('.doc-gallery-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const img = item.querySelector('img');
+        const cap = item.querySelector('.doc-gallery-caption');
+        if (img) openModal(img.src, cap ? cap.textContent : '');
+      });
+    });
+
+    if (closeBtn) closeBtn.addEventListener('click', () => overlay.classList.remove('open'));
+    overlay.addEventListener('click', e => { if (e.target === overlay) overlay.classList.remove('open'); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') overlay.classList.remove('open'); });
+  })();
+</script>
+
 </body>
 </html>
