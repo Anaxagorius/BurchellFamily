@@ -904,8 +904,7 @@ p { margin-bottom: 1rem; }
   border: 3px solid var(--ns-gold);
   border-radius: 6px;
   overflow: hidden;
-  /* Reel aspect ratio ~9:16 capped to reasonable height */
-  aspect-ratio: 9 / 16;
+  aspect-ratio: 16 / 9;
   max-height: 540px;
   max-width: 100%;
   width: 100%;
@@ -913,7 +912,8 @@ p { margin-bottom: 1rem; }
   box-shadow: 0 8px 32px rgba(0,0,0,0.5);
 }
 
-.video-frame-outer iframe {
+.video-frame-outer iframe,
+.video-frame-outer video {
   position: absolute;
   inset: 0;
   width: 100%;
