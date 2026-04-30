@@ -42,6 +42,7 @@
       <li><a href="gallery.html">Gallery &amp; Video</a></li>
       <li><a href="sources.html">Research &amp; Sources</a></li>
       <li><a href="allison.html">Allison Heritage</a></li>
+      <li><a href="index.html#comments">💬 Comments</a></li>
     </ul>
   </div>
 </nav>
@@ -304,6 +305,64 @@
   </div>
 </section>
 
+<!-- ── Leave a Comment ──────────────────────────────────────────── -->
+<section class="section comments-section" id="comments">
+  <div class="container">
+    <h2 class="section-title">Leave a Comment</h2>
+    <p class="section-subtitle">Share a memory, a story, or say hello to the family.</p>
+
+    <div class="contact-callout reveal">
+      <span class="contact-callout-icon">📸</span>
+      <div>
+        <strong>Got photos or videos?</strong>
+        Email them directly to Thomas —
+        <a href="mailto:tbburchell@gmail.com">tbburchell@gmail.com</a>
+        and they may be added to the gallery!
+      </div>
+    </div>
+
+    <!-- Shown only when Firebase isn't configured yet -->
+    <div id="comment-db-warning" class="comment-db-warning" hidden>
+      <strong>📋 Local mode:</strong> Comments are stored in <em>this browser only</em> until the database is set up.
+      See the <a href="README.md">README</a> for one-time Firebase setup instructions.
+    </div>
+
+    <div class="comment-form-wrapper reveal">
+      <form id="comment-form" novalidate>
+        <!-- Honeypot – must stay hidden from real users -->
+        <label class="comment-hp-label" aria-hidden="true">
+          Leave this blank
+          <input type="text" id="comment-hp" name="comment-hp" tabindex="-1" autocomplete="off">
+        </label>
+
+        <div class="form-group">
+          <label for="comment-name">Your Name <span class="required">*</span></label>
+          <input type="text" id="comment-name" name="comment-name"
+                 placeholder="e.g. Mary Burchell" required maxlength="80" autocomplete="name">
+        </div>
+
+        <div class="form-group">
+          <label for="comment-text">Your Comment <span class="required">*</span></label>
+          <textarea id="comment-text" name="comment-text"
+                    placeholder="Share a memory, a story, or a question…"
+                    required maxlength="1200" rows="5"></textarea>
+          <small class="char-note">Max 1,200 characters</small>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-gold">Post Comment</button>
+        </div>
+
+        <p id="comment-status" class="comment-status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+
+    <div id="comments-list" class="comments-list" aria-label="Family comments">
+      <!-- Populated by comments.js -->
+    </div>
+  </div>
+</section>
+
 <!-- ── Footer ─────────────────────────────────────────────────── -->
 <footer class="site-footer">
   <div class="footer-crest" aria-hidden="true">⚜</div>
@@ -316,14 +375,19 @@
     <li><a href="timeline.html">Timeline</a></li>
     <li><a href="gallery.html">Gallery &amp; Video</a></li>
     <li><a href="sources.html">Research &amp; Sources</a></li>
+    <li><a href="index.html#comments">💬 Comments</a></li>
   </ul>
   <hr class="footer-divider" />
   <p class="footer-copy">
     A personal tribute crafted with love for the ancestors who came before.<br>
-    🍁 Glace Bay, Cape Breton, Nova Scotia, Canada &nbsp;|&nbsp; Research by Thomas Bernard Burchell
+    🍁 Glace Bay, Cape Breton, Nova Scotia, Canada &nbsp;|&nbsp; Research by Thomas Bernard Burchell<br>
+    <a href="mailto:tbburchell@gmail.com" class="footer-email">📧 tbburchell@gmail.com</a> — send photos, videos &amp; stories
   </p>
 </footer>
 
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script src="js/main.js"></script>
+<script src="js/comments.js"></script>
 </body>
 </html>
