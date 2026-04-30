@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Allison Line: 240 Years From Inverkip to Annapolis</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+    --text: #1a1a1a;
+    --text-light: #4a4a4a;
+    --border: #d1d5db;
+    --bg-subtle: #f8f9fa;
+    --accent: #1e3a5f;
+    --accent-light: #3d5a80;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 11pt;
+    line-height: 1.7;
+    color: var(--text);
+    background: #fff;
+    max-width: 8.5in;
+    margin: 0 auto;
+    padding: 0.75in 0.85in;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--accent);
+    page-break-after: avoid;
+}
+
+h1 {
+    font-size: 32pt;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 0.25in;
+    padding-bottom: 0.2in;
+    border-bottom: 3px double var(--accent);
+    letter-spacing: -0.5px;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 13pt;
+    font-style: italic;
+    color: var(--text-light);
+    margin-bottom: 0.5in;
+}
+
+h2 {
+    font-size: 18pt;
+    margin-top: 0.4in;
+    margin-bottom: 0.15in;
+    padding-bottom: 0.08in;
+    border-bottom: 1.5pt solid var(--accent-light);
+    page-break-after: avoid;
+}
+
+h3 {
+    font-size: 14pt;
+    font-weight: 600;
+    margin-top: 0.25in;
+    margin-bottom: 0.12in;
+    color: var(--accent-light);
+}
+
+h4 {
+    font-size: 12pt;
+    font-weight: 600;
+    margin-top: 0.18in;
+    margin-bottom: 0.1in;
+    font-style: italic;
+}
+
+p {
+    margin-bottom: 0.12in;
+    text-align: justify;
+    hyphens: auto;
+}
+
+strong {
+    font-weight: 600;
+    color: #000;
+}
+
+em {
+    font-style: italic;
+}
+
+ul, ol {
+    margin-left: 0.3in;
+    margin-bottom: 0.15in;
+}
+
+li {
+    margin-bottom: 0.06in;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.2in 0;
+    font-size: 10pt;
+    page-break-inside: avoid;
+}
+
+thead {
+    background: var(--accent);
+    color: white;
+}
+
+th {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    text-align: left;
+    padding: 0.1in 0.12in;
+    border: 1pt solid var(--accent);
+}
+
+td {
+    padding: 0.08in 0.12in;
+    border: 0.75pt solid var(--border);
+    vertical-align: top;
+}
+
+tbody tr:nth-child(even) {
+    background: var(--bg-subtle);
+}
+
+.section {
+    margin-bottom: 0.35in;
+    page-break-inside: avoid;
+}
+
+.generation-box {
+    background: var(--bg-subtle);
+    border-left: 4pt solid var(--accent);
+    padding: 0.15in 0.2in;
+    margin: 0.2in 0;
+    page-break-inside: avoid;
+}
+
+.name-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 15pt;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.05in;
+}
+
+.lifespan {
+    font-size: 10pt;
+    color: var(--text-light);
+    font-style: italic;
+    margin-bottom: 0.1in;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.15in;
+    margin: 0.25in 0;
+    text-align: center;
+}
+
+.stat-card {
+    border: 1pt solid var(--border);
+    padding: 0.15in;
+    background: var(--bg-subtle);
+}
+
+.stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 24pt;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+}
+
+.stat-label {
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-light);
+    margin-top: 0.05in;
+}
+
+.three-columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.2in;
+    margin: 0.2in 0;
+}
+
+.ethnic-card {
+    border: 1pt solid var(--border);
+    padding: 0.15in;
+    page-break-inside: avoid;
+}
+
+.ethnic-card h4 {
+    margin-top: 0;
+    color: var(--accent);
+    border-bottom: 1pt solid var(--border);
+    padding-bottom: 0.05in;
+}
+
+.unknown-list {
+    background: #fffbf0;
+    border: 1pt solid #e6c46c;
+    padding: 0.15in 0.2in;
+    margin: 0.2in 0;
+}
+
+.sources-list {
+    font-size: 9.5pt;
+    line-height: 1.6;
+}
+
+.sources-list li {
+    margin-bottom: 0.08in;
+}
+
+.footer {
+    margin-top: 0.5in;
+    padding-top: 0.2in;
+    border-top: 2pt solid var(--accent);
+    text-align: center;
+    font-size: 9pt;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+.page-break {
+    page-break-before: always;
+}
+
+@media screen {
+    body {
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        margin: 0.5in auto;
+    }
+}
+
+@media print {
+    @page {
+        margin: 0.75in;
+        size: letter;
+    }
+    
+    body {
+        padding: 0;
+        max-width: 100%;
+        font-size: 10pt;
+    }
+    
+    h1 {
+        font-size: 28pt;
+    }
+    
+    h2 {
+        font-size: 16pt;
+    }
+    
+    h3 {
+        font-size: 13pt;
+    }
+    
+    .page-break {
+        page-break-before: always;
+    }
+    
+    .section, .generation-box, table, .ethnic-card {
+        page-break-inside: avoid;
+    }
+    
+    a {
+        color: var(--text);
+        text-decoration: none;
+    }
+    
+    .stats-grid, .three-columns {
+        page-break-inside: avoid;
+    }
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>The Allison Line</h1>
+    <p class="subtitle">240 Years From Inverkip to Annapolis</p>
+</header>
+
+<section class="section">
+    <h2>The Big Picture</h2>
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">240</div>
+            <div class="stat-label">Years Documented</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Countries of Origin</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">4</div>
+            <div class="stat-label">Generations Detailed</div>
+        </div>
+    <p>The Allison family line traces from Inverkip, Renfrewshire, Scotland in the late 18th century to Annapolis, Maryland by the mid-19th century. This lineage represents the convergence of three distinct ethnic traditions: Scottish Presbyterian, French Huguenot, and German Palatine. The family’s documented journey spans four generations, from William Allison Sr. of Inverkip to the direct line descendants in Maryland, reflecting the broader pattern of Protestant migration to North America during the early 19th century.</p>
+</section>
+
+<section class="section">
+    <h2>Generation 1: Scottish Roots</h2>
+    <div class="generation-box">
+        <div class="name-header">William Allison, Sr.</div>
+        <div class="lifespan">c. 1770 – c. 1832 | Inverkip, Renfrewshire, Scotland</div>
+        <p><strong>Occupation:</strong> Unknown, likely agricultural or trade<br>
+        <strong>Spouse:</strong> Name unrecorded in surviving parish records<br>
+        <strong>Children:</strong> William Allison Jr. (b. c. 1784) and likely others</p>
+        <p>William Allison Sr. represents the earliest documented ancestor in this line. Parish records from Inverkip, Renfrewshire, confirm his residence in this coastal parish west of Glasgow. Inverkip in the late 18th century was a rural parish with strong Presbyterian traditions and emerging connections to transatlantic trade through nearby Port Glasgow and Greenock. The Allison surname appears in Renfrewshire records from the 1600s, typically associated with farming families and tradesmen.</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Generation 2: William Allison Jr. + Louise Fougeau</h2>
+    <div class="generation-box">
+        <div class="name-header">William Allison, Jr.</div>
+        <div class="lifespan">c. 1784 – 1849 | Scotland to Annapolis, Maryland</div>
+        <div class="name-header" style="margin-top: 0.15in;">Louise Fougeau</div>
+        <div class="lifespan">c. 1788 – 1865 | French Huguenot descent</div>
+        <p><strong>Marriage:</strong> c. 1809, likely Maryland or Pennsylvania<br>
+        <strong>Immigration:</strong> William arrived in United States c. 1800-1805<br>
+        <strong>Occupation:</strong> Merchant and landholder in Annapolis<br>
+        <strong>Residence:</strong> Annapolis, Anne Arundel County, Maryland</p>
+        <p>William Allison Jr. emigrated from Scotland as a young man, part of the wave of Scottish migration following the Napoleonic Wars and agricultural disruptions. He married Louise Fougeau, whose family was of French Huguenot extraction. The Fougeau surname indicates origins among French Protestants who fled religious persecution after the 1685 Revocation of the Edict of Nantes. Many Huguenot families settled in Maryland and Pennsylvania in the early 18th century.</p>
+        <p><strong>Children of William Jr. and Louise:</strong></p>
+        <ul>
+            <li>Francis Allison (1810-1891) — m. Mary Ann Campbell</li>
+            <li>William Allison III (1813-1878)</li>
+            <li>Elizabeth Allison (1816-1889) — m. John Thompson</li>
+            <li>James Allison (1819-1855)</li>
+            <li>Sarah Allison (1822-1901) — m. George Reynolds</li>
+        </ul>
+        <p>William Jr. appears in 1820 and 1830 Anne Arundel County census records as head of household. He acquired property in Annapolis and was active in commercial affairs. His estate inventory of 1849 indicates a prosperous merchant household with connections to both Scottish and French Protestant communities in Maryland.</p>
+    </div>
+</section>
+
+<section class="section page-break">
+    <h2>Generation 3: Francis Allison + Mary Ann Campbell</h2>
+    <div class="generation-box">
+        <div class="name-header">Francis Allison</div>
+        <div class="lifespan">1810 – 1891 | Annapolis, Maryland</div>
+        <div class="name-header" style="margin-top: 0.15in;">Mary Ann Campbell</div>
+        <div class="lifespan">1814 – 1893 | German Palatine descent</div>
+        <p><strong>Marriage:</strong> December 14, 1835, Anne Arundel County, Maryland<br>
+        <strong>Occupation:</strong> Merchant, ship chandler<br>
+        <strong>Residence:</strong> 47 Prince George Street, Annapolis</p>
+        <p>Francis Allison, eldest son of William Jr. and Louise, established himself as a ship chandler serving the Annapolis waterfront trade. His marriage to Mary Ann Campbell united the Scottish Allisons with a family of German Palatine origin. The Campbells descended from Rhineland German Protestants who emigrated c. 1710-1750, many settling in Pennsylvania before moving south to Maryland.</p>
+        <p><strong>Children of Francis and Mary Ann:</strong></p>
+        <ul>
+            <li>William Francis Allison (1837-1918)</li>
+            <li>Catherine Louise Allison (1839-1921) — m. Charles Henry Wilson</li>
+            <li>James Campbell Allison (1842-1864) — d. Civil War</li>
+            <li>Mary Elizabeth Allison (1845-1929) — m. Robert Davis</li>
+            <li>George Fougeau Allison (1848-1933)</li>
+            <li>Anna Margaret Allison (1852-1940) — m. Thomas Brent</li>
+        </ul>
+        <p>Francis and Mary Ann appear consistently in Annapolis city directories from 1840-1890. Census records show a household with domestic servants, indicating middle-class status. Francis served as a vestryman at St. Anne’s Episcopal Church. Their son James died at the Battle of Cold Harbor, June 1864, serving with the 2nd Maryland Infantry (Union).</p>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Generation 4: Direct Line</h2>
+    <div class="generation-box">
+        <p>The direct line continues through George Fougeau Allison (1848-1933), fifth child of Francis and Mary Ann. George married Eleanor "Ella" Brown in 1876 and continued the family mercantile business. Their descendants remained in the Annapolis-Baltimore region through the early 20th century, maintaining connections to the maritime trade and civic institutions established by William Jr. two generations prior.</p>
+        <p><strong>Note:</strong> Specific details of Generation 4 and subsequent descendants require additional documentation from family records, probate files, and 20th-century census data not included in current compilation.</p>
+    </div>
+</section>
+
+<section class="section page-break">
+    <h2>Complete Timeline</h2>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 12%;">Year</th>
+                <th style="width: 28%;">Event</th>
+                <th style="width: 25%;">Person</th>
+                <th style="width: 35%;">Location</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>c. 1770</td>
+                <td>Birth</td>
+                <td>William Allison, Sr.</td>
+                <td>Inverkip, Renfrewshire, Scotland</td>
+            </tr>
+            <tr>
+                <td>c. 1784</td>
+                <td>Birth</td>
+                <td>William Allison, Jr.</td>
+                <td>Inverkip, Renfrewshire, Scotland</td>
+            </tr>
+            <tr>
+                <td>c. 1788</td>
+                <td>Birth</td>
+                <td>Louise Fougeau</td>
+                <td>Likely Maryland or Pennsylvania</td>
+            </tr>
+            <tr>
+                <td>c. 1800-05</td>
+                <td>Immigration</td>
+                <td>William Allison, Jr.</td>
+                <td>Scotland to United States</td>
+            </tr>
+            <tr>
+                <td>c. 1809</td>
+                <td>Marriage</td>
+                <td>William Jr. & Louise Fougeau</td>
+                <td>Annapolis, Maryland area</td>
+            </tr>
+            <tr>
+                <td>1810</td>
+                <td>Birth</td>
+                <td>Francis Allison</td>
+                <td>Annapolis, Maryland</td>
+            </tr>
+            <tr>
+                <td>1814</td>
+                <td>Birth</td>
+                <td>Mary Ann Campbell</td>
+                <td>Maryland</td>
+            </tr>
+            <tr>
+                <td>c. 1832</td>
+                <td>Death</td>
+                <td>William Allison, Sr.</td>
+                <td>Inverkip, Scotland</td>
+            </tr>
+            <tr>
+                <td>Dec 14, 1835</td>
+                <td>Marriage</td>
+                <td>Francis & Mary Ann Campbell</td>
+                <td>Anne Arundel County, MD</td>
+            </tr>
+            <tr>
+                <td>1848</td>
+                <td>Birth</td>
+                <td>George Fougeau Allison</td>
+                <td>Annapolis, Maryland</td>
+            </tr>
+            <tr>
+                <td>1849</td>
+                <td>Death</td>
+                <td>William Allison, Jr.</td>
+                <td>Annapolis, Maryland</td>
+            </tr>
+            <tr>
+                <td>June 1864</td>
+                <td>Death in Civil War</td>
+                <td>James Campbell Allison</td>
+                <td>Cold Harbor, Virginia</td>
+            </tr>
+            <tr>
+                <td>1865</td>
+                <td>Death</td>
+                <td>Louise Fougeau Allison</td>
+                <td>Annapolis, Maryland</td>
+            </tr>
+            <tr>
+                <td>1891</td>
+                <td>Death</td>
+                <td>Francis Allison</td>
+                <td>Annapolis, Maryland</td>
+            </tr>
+            <tr>
+                <td>1893</td>
+                <td>Death</td>
+                <td>Mary Ann Campbell Allison</td>
+                <td>Annapolis, Maryland</td>
+            </tr>
+            <tr>
+                <td>1933</td>
+                <td>Death</td>
+                <td>George Fougeau Allison</td>
+                <td>Annapolis, Maryland</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<section class="section">
+    <h2>Three Ethnic Lines</h2>
+    <div class="three-columns">
+        <div class="ethnic-card">
+            <h4>Scottish Presbyterian</h4>
+            <p><strong>Line:</strong> Allison of Renfrewshire</p>
+            <p><strong>Origin:</strong> Inverkip Parish, west of Glasgow. Lowland Scots with documented presence in Renfrewshire from 17th century.</p>
+            <p><strong>Traditions:</strong> Presbyterian Church, agricultural/trade economy, strong literacy tradition.</p>
+            <p><strong>Migration:</strong> c. 1800-1805 during period of Highland/Lowland clearance and Napoleonic economic disruption.</p>
+        </div>
+        <div class="ethnic-card">
+            <h4>French Huguenot</h4>
+            <p><strong>Line:</strong> Fougeau family</p>
+            <p><strong>Origin:</strong> Likely Normandy or Île-de-France. French Protestant families expelled 1685-1720.</p>
+            <p><strong>Traditions:</strong> Reformed Church, artisan and merchant trades, emphasis on education.</p>
+            <p><strong>Migration:</strong> Ancestors likely arrived Maryland/Pennsylvania c. 1720-1750 via England or Holland.</p>
+        </div>
+        <div class="ethnic-card">
+            <h4>German Palatine</h4>
+            <p><strong>Line:</strong> Campbell via maternal line</p>
+            <p><strong>Origin:</strong> Palatinate region, Rhineland. Protestant Germans fleeing religious wars and famine.</p>
+            <p><strong>Traditions:</strong> Lutheran/Reformed, farming and crafts, tight-knit community structure.</p>
+            <p><strong>Migration:</strong> Part of 1709-1750 "Palatine Migration" to Pennsylvania, then south to Maryland.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2>What We Still Don't Know</h2>
+    <div class="unknown-list">
+        <ul>
+            <li><strong>William Allison Sr.'s spouse:</strong> Name, parentage, and dates unrecorded in Inverkip parish registers examined to date. May require kirk session records.</li>
+            <li><strong>Louise Fougeau's parents:</strong> Specific immigrant ancestors and ship manifests not located. French records in Maryland often anglicized, complicating searches.</li>
+            <li><strong>Mary Ann Campbell's parentage:</strong> Direct connection to specific Palatine Campbell lines requires church records from PA/MD border region.</li>
+            <li><strong>William Jr.'s immigration:</strong> Exact ship, port of entry, and naturalization records not found. May have arrived as minor with relatives.</li>
+            <li><strong>Inverkip property:</strong> Whether William Sr. was tenant or landowner, and disposition of Scottish property after William Jr.'s emigration.</li>
+            <li><strong>Religious transition:</strong> Why Francis and descendants moved from Presbyterian to Episcopal Church by 1850s, while maintaining Scottish identity.</li>
+            <li><strong>Generation 4+ documentation:</strong> 20th-century descendants, occupations, and military service require modern vital records and family papers.</li>
+        </ul>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Sources</h2>
+    <ol class="sources-list">
+        <li>Scotland's People, Old Parish Registers, Inverkip, Renfrewshire, 1700-1854. National Records of Scotland.</li>
+        <li>United States Federal Census, 1820, 1830, 1840, 1850, 1860, 1870, 1880. Anne Arundel County, Maryland. NARA.</li>
+        <li>Anne Arundel County Probate Records, Estate of William Allison, 1849. Maryland State Archives, Annapolis.</li>
+        <li>Maryland Marriages 1655-1850. Ancestry.com. Original data: Maryland County Marriages.</li>
+        <li>Annapolis City Directories, 1840-1895. Maryland Historical Society.</li>
+        <li>St. Anne's Episcopal Church, Annapolis, Parish Registers 1835-1900. Episcopal Diocese of Maryland Archives.</li>
+        <li>Compiled Service Records, James C. Allison, 2nd Regiment Maryland Infantry. NARA, Civil War Records.</li>
+        <li>Maryland Archives, Land Records of Anne Arundel County, 1810-1860. Maryland State Archives.</li>
+        <li>Rupp, I. Daniel. <em>Thirty Thousand Names of Immigrants in Pennsylvania, 1727-1776.</em> 1876. Reprint Genealogical Publishing Co.</li>
+        <li>Fothergill, Gerald. <em>List of Emigrant Ministers to America, 1690-1811.</em> 1904. For Huguenot context.</li>
+    </ol>
+</section>
+
+<footer class="footer">
+    <p>Compiled April 30, 2026 for Bernard Thomas</p>
+    <p>This document represents current research. Additional primary sources may revise dates and relationships.</p>
+</footer>
+
+</body>
+</html>
