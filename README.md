@@ -4,8 +4,6 @@ A personal heritage website tracing the Burchell family of Glace Bay, Nova Scoti
 
 ## Project Structure
 
-This is a static HTML/CSS/JS website with no build step required.
-
 ```
 index.html        – Home page (includes comment section)
 stories.html      – Family stories
@@ -16,19 +14,47 @@ sources.html      – Research & sources
 css/              – Stylesheets
 js/               – JavaScript files
   main.js         – Navigation, gallery, counters
-  comments.js     – Comment section + profanity filter
+  comments.js     – Comment section + profanity filter + backend detection
 images/           – Image assets
+server.js         – Node.js/Express server (serves static files + comments API)
+package.json      – Node.js dependencies
+data/             – SQLite database directory (created automatically; git-ignored)
 ```
 
 ## Comment Section
 
 Family members can leave comments on the home page. Comments include a built-in profanity filter and a rate limiter (max 3 posts per 10 minutes per device).
 
-**Without a database configured**, comments are stored in each visitor's own browser (localStorage) — good enough to try things out, but visitors won't see each other's comments.
+The comment backend is chosen automatically (in priority order):
 
-**To share comments across all visitors** (recommended), set up a free Firebase Firestore database — one-time, takes about 10 minutes:
+| Priority | Backend | When active |
+|---|---|---|
+| 1 | **Local API** (`/api/comments`) | Running `server.js` (Render Web Service) |
+| 2 | **Firebase Firestore** | `FIREBASE_CONFIG` filled in `js/comments.js` |
+| 3 | **localStorage** | Browser-only fallback — comments not shared |
 
-### Firebase Setup (one-time)
+### Running the server locally
+
+```bash
+npm install
+npm start          # or: node server.js
+```
+
+Then open [http://localhost:3000](http://localhost:3000). Comments are stored in `data/comments.db`.
+
+### Persistent storage on Render (recommended)
+
+Render's free Web Service tier has an **ephemeral filesystem** — the SQLite file is wiped on each deploy. To keep comments permanently:
+
+1. In the Render dashboard, open your Web Service → **Disks → Add Disk**.
+2. Set the **Mount Path** to `/data` and choose a size (1 GB is plenty).
+3. Add an environment variable: `DATA_DIR` = `/data`
+
+The server reads `DATA_DIR` automatically and the SQLite database will survive deploys.
+
+### Firebase setup (alternative)
+
+If you prefer Firebase Firestore instead of the local SQLite database:
 
 1. Go to [https://console.firebase.google.com](https://console.firebase.google.com) and sign in with a Google account.
 2. Click **Add project**, give it a name (e.g. `burchell-family`), and follow the prompts.
@@ -62,19 +88,21 @@ Family members can leave comments on the home page. Comments include a built-in 
    }
    ```
    Click **Publish**.
-7. Commit and push `js/comments.js` — Render will auto-deploy and comments will now persist for everyone.
+7. Commit and push `js/comments.js` — the server will auto-deploy and Firebase will be used when the `/api/comments` endpoint is unavailable.
 
 > **Firebase free tier** (Spark plan) is more than enough for a family website: 1 GB storage, 50,000 reads/day, 20,000 writes/day — all free, no credit card needed.
 
 ## Deploying on Render
 
-[Render](https://render.com) can host this site for free as a **Static Site**.
+[Render](https://render.com) can host this site for free as a **Web Service** (Node.js). This serves both the static pages and the `/api/comments` database endpoint.
+
+> **If you previously deployed as a Static Site**, delete that service and create a new **Web Service** instead — the configuration is different.
 
 ### Steps
 
 1. **Push your code to GitHub** (or GitLab) if you haven't already.
 
-2. **Log in to Render** at [https://render.com](https://render.com) and click **New → Static Site**.
+2. **Log in to Render** at [https://render.com](https://render.com) and click **New → Web Service**.
 
 3. **Connect your repository** — select the `BurchellFamily` repo from the list.
 
@@ -84,15 +112,18 @@ Family members can leave comments on the home page. Comments include a built-in 
    |---|---|
    | **Name** | `burchell-family` (or any name you like) |
    | **Branch** | `main` |
-   | **Build Command** | *(leave blank — no build step needed)* |
-   | **Publish Directory** | `.` (the repository root) |
+   | **Runtime** | `Node` |
+   | **Build Command** | `npm install` |
+   | **Start Command** | `npm start` |
 
-5. Click **Create Static Site**.
+5. Click **Create Web Service**.
 
 Render will deploy the site and provide a URL like `https://burchell-family.onrender.com`. Every push to the configured branch will automatically trigger a new deployment.
 
+> **Note on free-tier storage:** The SQLite database (`data/comments.db`) is stored on the server's local disk. On Render's free tier this disk is ephemeral — comments will be lost when the service restarts or redeploys. See *Persistent storage on Render* above to add a Render Disk and keep comments permanently.
+
 ### Custom Domain (Optional)
 
-1. In your Render dashboard, open the static site and go to **Settings → Custom Domains**.
+1. In your Render dashboard, open the web service and go to **Settings → Custom Domains**.
 2. Click **Add Custom Domain** and enter your domain name.
 3. Follow the instructions to add the required DNS records with your domain registrar.
