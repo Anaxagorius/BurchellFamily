@@ -22,8 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
     item.addEventListener('click', () => {
       if (!overlay) return;
       const img = item.querySelector('img');
+      if (!img || !modalImg) return;
       const cap = item.querySelector('.gallery-caption');
-      if (img && modalImg) modalImg.src = img.src;
+      modalImg.src = img.src;
       if (cap && modalCap) modalCap.textContent = cap.textContent;
       overlay.classList.add('open');
     });
