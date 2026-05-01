@@ -1,46 +1,42 @@
 // ── Burchell Family Comment Server ───────────────────────────
-// Simple Express + SQLite backend that:
+// Simple Express + Firestore backend that:
 //   • Serves all static site files (HTML, CSS, JS, images)
 //   • Provides a /api/comments REST endpoint for the comment section
 //
-// Data is stored in data/comments.db (SQLite).
-// On Render free tier the filesystem is ephemeral — add a Render Disk
-// mounted at /data to make comments persistent across deploys.
+// Credentials: set the FIREBASE_SERVICE_ACCOUNT environment variable to the
+// full JSON content of your Firebase service account key file.
 // ─────────────────────────────────────────────────────────────
 
 'use strict';
 
-const express  = require('express');
-const Database = require('better-sqlite3');
-const path     = require('path');
-const fs       = require('fs');
+const express = require('express');
+const admin   = require('firebase-admin');
+const path    = require('path');
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
 
-// ── Database setup ────────────────────────────────────────────
-// Use DATA_DIR env var so a Render Disk can be mounted there.
-const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
-if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
+// ── Firebase Admin setup ──────────────────────────────────────
+const serviceAccountJson = process.env.FIREBASE_SERVICE_ACCOUNT;
+if (!serviceAccountJson) {
+  console.error('ERROR: FIREBASE_SERVICE_ACCOUNT environment variable is not set.');
+  process.exit(1);
+}
 
-const db = new Database(path.join(DATA_DIR, 'comments.db'));
+let serviceAccount;
+try {
+  serviceAccount = JSON.parse(serviceAccountJson);
+} catch (err) {
+  console.error('ERROR: FIREBASE_SERVICE_ACCOUNT is not valid JSON:', err.message);
+  process.exit(1);
+}
 
-db.exec(`
-  CREATE TABLE IF NOT EXISTS comments (
-    id        INTEGER PRIMARY KEY AUTOINCREMENT,
-    name      TEXT    NOT NULL CHECK(length(name) > 0 AND length(name) <= 80),
-    text      TEXT    NOT NULL CHECK(length(text) > 0 AND length(text) <= 1200),
-    timestamp TEXT    NOT NULL
-  )
-`);
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
 
-// Prepared statements
-const stmtSelect = db.prepare(
-  'SELECT id, name, text, timestamp FROM comments ORDER BY id DESC LIMIT 100'
-);
-const stmtInsert = db.prepare(
-  'INSERT INTO comments (name, text, timestamp) VALUES (?, ?, ?)'
-);
+const db         = admin.firestore();
+const COLLECTION = 'burchell_comments';
 
 // ── Middleware ────────────────────────────────────────────────
 app.use(express.json({ limit: '16kb' }));
@@ -59,9 +55,24 @@ app.use(express.static(path.join(__dirname), {
 }));
 
 // ── API: GET /api/comments ────────────────────────────────────
-app.get('/api/comments', (req, res) => {
+app.get('/api/comments', async (req, res) => {
   try {
-    const rows = stmtSelect.all();
+    const snap = await db.collection(COLLECTION)
+      .orderBy('timestamp', 'desc')
+      .limit(100)
+      .get();
+
+    const rows = snap.docs.map(doc => {
+      const d = doc.data();
+      return {
+        id:        doc.id,
+        name:      d.name,
+        text:      d.text,
+        timestamp: d.timestamp && typeof d.timestamp.toDate === 'function'
+          ? d.timestamp.toDate().toISOString()
+          : String(d.timestamp)
+      };
+    });
     res.json(rows);
   } catch (err) {
     console.error('GET /api/comments error:', err);
@@ -70,7 +81,7 @@ app.get('/api/comments', (req, res) => {
 });
 
 // ── API: POST /api/comments ───────────────────────────────────
-app.post('/api/comments', (req, res) => {
+app.post('/api/comments', async (req, res) => {
   const { name, text } = req.body || {};
 
   if (!name || typeof name !== 'string' || name.trim().length === 0) {
@@ -82,11 +93,15 @@ app.post('/api/comments', (req, res) => {
 
   const safeName = name.trim().slice(0, 80);
   const safeText = text.trim().slice(0, 1200);
-  const timestamp = new Date().toISOString();
 
   try {
-    const info = stmtInsert.run(safeName, safeText, timestamp);
-    res.status(201).json({ id: info.lastInsertRowid, name: safeName, text: safeText, timestamp });
+    const docRef = await db.collection(COLLECTION).add({
+      name:      safeName,
+      text:      safeText,
+      timestamp: admin.firestore.FieldValue.serverTimestamp()
+    });
+    const now = new Date().toISOString();
+    res.status(201).json({ id: docRef.id, name: safeName, text: safeText, timestamp: now });
   } catch (err) {
     console.error('POST /api/comments error:', err);
     res.status(500).json({ error: 'Could not save comment.' });
