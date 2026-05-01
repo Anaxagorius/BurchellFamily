@@ -9,8 +9,8 @@
 // ─────────────────────────────────────────────────────────────
 
 const FIREBASE_CONFIG = {
-  apiKey:    'YOUR_API_KEY',
-  projectId: 'YOUR_PROJECT_ID'
+  apiKey:    'AIzaSyASUCd4nAOvD5HBhCdWdH9d3rKWR6QFYYM',
+  projectId: 'burchellfamilydb'
 };
 
 // ── Local API (server.js + SQLite) ────────────────────────────
