@@ -16,9 +16,8 @@ js/               – JavaScript files
   main.js         – Navigation, gallery, counters
   comments.js     – Comment section + profanity filter + backend detection
 images/           – Image assets
-server.js         – Node.js/Express server (serves static files + comments API)
+server.js         – Node.js/Express server (serves static files + comments API via Firestore)
 package.json      – Node.js dependencies
-data/             – SQLite database directory (created automatically; git-ignored)
 ```
 
 ## Comment Section
@@ -30,65 +29,65 @@ The comment backend is chosen automatically (in priority order):
 | Priority | Backend | When active |
 |---|---|---|
 | 1 | **Local API** (`/api/comments`) | Running `server.js` (Render Web Service) |
-| 2 | **Firebase Firestore** | `FIREBASE_CONFIG` filled in `js/comments.js` |
+| 2 | **Firebase Firestore** (client-side REST) | `server.js` not reachable but `FIREBASE_CONFIG` is set in `js/comments.js` |
 | 3 | **localStorage** | Browser-only fallback — comments not shared |
 
 ### Running the server locally
 
 ```bash
 npm install
-npm start          # or: node server.js
+FIREBASE_SERVICE_ACCOUNT='<paste service account JSON here>' npm start
 ```
 
-Then open [http://localhost:3000](http://localhost:3000). Comments are stored in `data/comments.db`.
+Then open [http://localhost:3000](http://localhost:3000). Comments are stored in Firestore.
 
-### Persistent storage on Render (recommended)
+### Firebase setup
 
-Render's free Web Service tier has an **ephemeral filesystem** — the SQLite file is wiped on each deploy. To keep comments permanently:
+The server uses Firebase Firestore as its database. You need a Firebase service account to run it.
 
-1. In the Render dashboard, open your Web Service → **Disks → Add Disk**.
-2. Set the **Mount Path** to `/data` and choose a size (1 GB is plenty).
-3. Add an environment variable: `DATA_DIR` = `/data`
+#### 1 — Create the Firebase project (if you haven't already)
 
-The server reads `DATA_DIR` automatically and the SQLite database will survive deploys.
-
-### Firebase setup (alternative)
-
-If you prefer Firebase Firestore instead of the local SQLite database:
-
-1. Go to [https://console.firebase.google.com](https://console.firebase.google.com) and sign in with a Google account.
-2. Click **Add project**, give it a name (e.g. `burchell-family`), and follow the prompts.
+1. Go to [https://console.firebase.google.com](https://console.firebase.google.com) and sign in.
+2. Click **Add project**, give it a name (e.g. `BurchellFamilyDB`), and follow the prompts.
 3. In the left sidebar, click **Firestore Database → Create database**.
-   - Choose **Start in production mode** → pick a region close to you (e.g. `us-east1`) → click **Enable**.
-4. Go to **Project Settings** (gear icon) → **General** → scroll to **Your apps** → click the **`</>`** (Web) icon.
-   - Register the app (any nickname), click **Register app**.
-   - Copy the `firebaseConfig` object shown on screen.
-5. Open `js/comments.js` in this repo and replace the placeholder `FIREBASE_CONFIG` at the top with your values:
-   ```js
-   const FIREBASE_CONFIG = {
-     apiKey:    "AIzaSy...",      // Web API Key from Project Settings
-     projectId: "your-project"   // Project ID from Project Settings
-   };
-   ```
-6. In the Firebase console, go to **Firestore Database → Rules** and replace the default rules with:
-   ```
-   rules_version = '2';
-   service cloud.firestore {
-     match /databases/{database}/documents {
-       match /burchell_comments/{doc} {
-         allow read: if true;
-         allow create: if request.resource.data.name is string
-                       && request.resource.data.name.size() > 0
-                       && request.resource.data.name.size() <= 80
-                       && request.resource.data.text is string
-                       && request.resource.data.text.size() > 0
-                       && request.resource.data.text.size() <= 1200;
-       }
-     }
-   }
-   ```
-   Click **Publish**.
-7. Commit and push `js/comments.js` — the server will auto-deploy and Firebase will be used when the `/api/comments` endpoint is unavailable.
+   - Choose **Start in production mode** → pick a region → click **Enable**.
+
+#### 2 — Get a service account key
+
+1. Go to **Project Settings** (gear icon) → **Service accounts** tab.
+2. Click **Generate new private key** → **Generate key**.
+3. Save the downloaded JSON file securely — this is your service account key.
+
+#### 3 — Set Firestore security rules
+
+In the Firebase console go to **Firestore Database → Rules** and publish:
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /burchell_comments/{doc} {
+      allow read: if true;
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.name.size() > 0
+                    && request.resource.data.name.size() <= 80
+                    && request.resource.data.text is string
+                    && request.resource.data.text.size() > 0
+                    && request.resource.data.text.size() <= 1200;
+    }
+  }
+}
+```
+
+#### 4 — Set the environment variable
+
+Set the `FIREBASE_SERVICE_ACCOUNT` environment variable to the **full JSON content** of the service account key file.
+
+On Render: Dashboard → Web Service → **Environment** → **Add Environment Variable**
+Key: `FIREBASE_SERVICE_ACCOUNT`
+Value: *(paste the entire JSON)*
+
+> **Never commit the service account key to git.**
 
 > **Firebase free tier** (Spark plan) is more than enough for a family website: 1 GB storage, 50,000 reads/day, 20,000 writes/day — all free, no credit card needed.
 
@@ -116,11 +115,11 @@ If you prefer Firebase Firestore instead of the local SQLite database:
    | **Build Command** | `npm install` |
    | **Start Command** | `npm start` |
 
-5. Click **Create Web Service**.
+5. Add the `FIREBASE_SERVICE_ACCOUNT` environment variable (see *Firebase setup* above).
+
+6. Click **Create Web Service**.
 
 Render will deploy the site and provide a URL like `https://burchell-family.onrender.com`. Every push to the configured branch will automatically trigger a new deployment.
-
-> **Note on free-tier storage:** The SQLite database (`data/comments.db`) is stored on the server's local disk. On Render's free tier this disk is ephemeral — comments will be lost when the service restarts or redeploys. See *Persistent storage on Render* above to add a Render Disk and keep comments permanently.
 
 ### Custom Domain (Optional)
 
