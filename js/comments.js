@@ -1,18 +1,61 @@
 // ── Burchell Family Comments ─────────────────────────────────
-// Uses Firebase Firestore REST API when configured; falls back to localStorage.
-// No external SDK needed — all requests use the browser's built-in fetch().
+// Backend priority (auto-detected at startup):
+//   1. Local API  — /api/comments  (available when running server.js)
+//   2. Firebase   — Firestore REST API (fill in FIREBASE_CONFIG below)
+//   3. localStorage — browser-only fallback (comments not shared)
 //
-// ONE-TIME SETUP (see README for full details):
-//   1. Create a free Firebase project at https://console.firebase.google.com
-//   2. Enable Firestore Database (start in "production" mode)
-//   3. Copy your Project ID and Web API Key below
-//   4. Publish the Firestore security rules shown in README
+// To use Firebase instead of the local server, fill in FIREBASE_CONFIG and
+// follow the Firebase Setup section in the README.
 // ─────────────────────────────────────────────────────────────
 
 const FIREBASE_CONFIG = {
   apiKey:    'YOUR_API_KEY',
   projectId: 'YOUR_PROJECT_ID'
 };
+
+// ── Local API (server.js + SQLite) ────────────────────────────
+const LOCAL_API_URL = '/api/comments';
+const BACKEND_CACHE_KEY = 'bfam_backend';
+
+async function localApiAvailable() {
+  try {
+    const cached = sessionStorage.getItem(BACKEND_CACHE_KEY);
+    if (cached) return cached === 'api';
+  } catch { /* ignore */ }
+  try {
+    const resp = await fetch(LOCAL_API_URL, { method: 'HEAD' });
+    const available = resp.ok;
+    try { sessionStorage.setItem(BACKEND_CACHE_KEY, available ? 'api' : 'other'); } catch { /* ignore */ }
+    return available;
+  } catch {
+    try { sessionStorage.setItem(BACKEND_CACHE_KEY, 'other'); } catch { /* ignore */ }
+    return false;
+  }
+}
+
+async function fetchCommentsLocal() {
+  const resp = await fetch(LOCAL_API_URL);
+  if (!resp.ok) throw new Error('Local API fetch failed: ' + resp.status);
+  const rows = await resp.json();
+  return rows.map(r => ({
+    id:        String(r.id),
+    name:      r.name,
+    text:      r.text,
+    timestamp: new Date(r.timestamp)
+  }));
+}
+
+async function postCommentLocal(name, text) {
+  const resp = await fetch(LOCAL_API_URL, {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body:    JSON.stringify({ name, text })
+  });
+  if (!resp.ok) {
+    const body = await resp.json().catch(() => ({}));
+    throw new Error(body.error || 'Local API write failed: ' + resp.status);
+  }
+}
 
 // ── Profanity filter ──────────────────────────────────────────
 // Add or remove words as needed for your family.
@@ -174,10 +217,23 @@ class CommentManager {
     this.formEl     = section.querySelector('#comment-form');
     this.statusEl   = section.querySelector('#comment-status');
     this.warningEl  = section.querySelector('#comment-db-warning');
-    this.useRemote  = !!(FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.apiKey !== 'YOUR_API_KEY' &&
-                         FIREBASE_CONFIG.projectId && FIREBASE_CONFIG.projectId !== 'YOUR_PROJECT_ID');
 
-    if (this.warningEl) this.warningEl.hidden = this.useRemote;
+    // backend: 'api' | 'firebase' | 'local' — resolved after detection
+    this.backend = null;
+    this._init();
+  }
+
+  async _init() {
+    if (await localApiAvailable()) {
+      this.backend = 'api';
+    } else if (FIREBASE_CONFIG.apiKey && FIREBASE_CONFIG.apiKey !== 'YOUR_API_KEY' &&
+               FIREBASE_CONFIG.projectId && FIREBASE_CONFIG.projectId !== 'YOUR_PROJECT_ID') {
+      this.backend = 'firebase';
+    } else {
+      this.backend = 'local';
+    }
+
+    if (this.warningEl) this.warningEl.hidden = (this.backend !== 'local');
     this._loadComments();
     this._setupForm();
   }
@@ -187,7 +243,9 @@ class CommentManager {
     this.listEl.innerHTML = '<p class="comments-loading">Loading comments…</p>';
     try {
       let comments;
-      if (this.useRemote) {
+      if (this.backend === 'api') {
+        comments = await fetchCommentsLocal();
+      } else if (this.backend === 'firebase') {
         comments = await fetchComments();
       } else {
         comments = getLocalComments()
@@ -257,7 +315,9 @@ class CommentManager {
       this._setStatus('');
 
       try {
-        if (this.useRemote) {
+        if (this.backend === 'api') {
+          await postCommentLocal(name, text);
+        } else if (this.backend === 'firebase') {
           await postComment(name, text);
         } else {
           saveLocalComment({ id: String(Date.now()), name, text, timestamp: new Date().toISOString() });
