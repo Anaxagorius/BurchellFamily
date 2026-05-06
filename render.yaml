@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: burchell-family
+    env: node
+    plan: free
+    buildCommand: npm install --omit=dev
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: INITIAL_VISIT_COUNT
+        value: 0
