@@ -360,7 +360,7 @@
     fetch('/api/visits')
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (data) {
-        if (data && data.count) {
+        if (data && typeof data.count === 'number') {
           el.textContent = Number(data.count).toLocaleString();
         }
       })

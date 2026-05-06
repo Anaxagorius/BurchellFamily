@@ -22,15 +22,21 @@ function loadVisits() {
   }
 }
 
-function saveVisits(count) {
-  try { fs.writeFileSync(VISITS_FILE, JSON.stringify({ count })); } catch { /* ignore */ }
-}
-
 let visitorCount = loadVisits();
+let saveTimer    = null;
+
+function scheduleSave() {
+  if (saveTimer) return;
+  saveTimer = setTimeout(() => {
+    saveTimer = null;
+    const snapshot = visitorCount;
+    fs.writeFile(VISITS_FILE, JSON.stringify({ count: snapshot }), () => { /* ignore errors */ });
+  }, 2000);
+}
 
 app.get('/api/visits', (req, res) => {
   visitorCount += 1;
-  saveVisits(visitorCount);
+  scheduleSave();
   res.json({ count: visitorCount });
 });
 
