@@ -357,7 +357,7 @@
   (function () {
     var el = document.getElementById('visitor-count');
     if (!el) return;
-    fetch('/api/visits')
+    fetch('/api/visits', { cache: 'no-store' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (data) {
         if (data && typeof data.count === 'number') {

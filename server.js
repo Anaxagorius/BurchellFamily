@@ -37,6 +37,7 @@ function scheduleSave() {
 app.get('/api/visits', (req, res) => {
   visitorCount += 1;
   scheduleSave();
+  res.set('Cache-Control', 'no-store');
   res.json({ count: visitorCount });
 });
 
