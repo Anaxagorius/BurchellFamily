@@ -17,7 +17,16 @@ const VISITS_FILE = path.join(__dirname, 'visits.json');
 // INITIAL_VISIT_COUNT lets you set a persistent floor in the Render dashboard.
 // Update it whenever you want to preserve the accumulated count across redeploys
 // or restarts (Render's free tier resets the in-process state on spin-down).
-const INITIAL_COUNT = parseInt(process.env.INITIAL_VISIT_COUNT, 10) || 0;
+const INITIAL_COUNT = (() => {
+  const raw = process.env.INITIAL_VISIT_COUNT;
+  if (raw === undefined || raw === '') return 0;
+  const n = parseInt(raw, 10);
+  if (isNaN(n)) {
+    console.warn(`INITIAL_VISIT_COUNT="${raw}" is not a valid integer; defaulting to 0`);
+    return 0;
+  }
+  return n;
+})();
 
 function loadVisits() {
   try {
