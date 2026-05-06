@@ -337,12 +337,36 @@
     <li><a href="index.html#contact">📧 Contact</a></li>
   </ul>
   <hr class="footer-divider" />
+
+  <!-- ── Visitor Counter ──────────────────────────────────────── -->
+  <div class="visitor-counter" aria-label="Site visitor counter">
+    <span class="visitor-counter-icon" aria-hidden="true">👣</span>
+    <span class="visitor-counter-label">Visitors to this page:</span>
+    <span class="visitor-counter-number" id="visitor-count" aria-live="polite">…</span>
+  </div>
+
   <p class="footer-copy">
     A personal tribute crafted with love for the ancestors who came before.<br>
     🍁 Glace Bay, Cape Breton, Nova Scotia, Canada &nbsp;|&nbsp; Research by Thomas Bernard Burchell<br>
     <a href="mailto:tbburchell@gmail.com" class="footer-email">📧 tbburchell@gmail.com</a> — send photos, videos &amp; stories
   </p>
 </footer>
+
+<script>
+  // Fetch and display the visitor count from the server
+  (function () {
+    var el = document.getElementById('visitor-count');
+    if (!el) return;
+    fetch('/api/visits')
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (data) {
+        if (data && typeof data.count === 'number') {
+          el.textContent = Number(data.count).toLocaleString();
+        }
+      })
+      .catch(function () { /* silently ignore if the API is unavailable */ });
+  }());
+</script>
 
 <script src="js/main.js"></script>
 </body>
