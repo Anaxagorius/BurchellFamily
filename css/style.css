@@ -814,6 +814,31 @@ p { margin-bottom: 1rem; }
 
 .footer-copy { font-size: 0.78rem; color: #556; }
 
+/* ── Visitor Counter ─────────────────────────────────────── */
+.visitor-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(200, 160, 53, 0.12);
+  border: 1px solid rgba(200, 160, 53, 0.35);
+  border-radius: 999px;
+  padding: 0.35rem 1.1rem;
+  margin: 0.75rem 0 1.25rem;
+  font-size: 0.82rem;
+  color: #aab;
+}
+
+.visitor-counter-icon { font-size: 1rem; }
+
+.visitor-counter-label { letter-spacing: 0.03em; }
+
+.visitor-counter-number {
+  color: var(--ns-gold);
+  font-weight: bold;
+  font-size: 1rem;
+  min-width: 2ch;
+}
+
 /* ── Parchment Section ────────────────────────────────────── */
 .parchment-section {
   background: var(--parchment);
